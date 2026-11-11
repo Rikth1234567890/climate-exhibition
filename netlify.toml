@@ -1,0 +1,49 @@
+# netlify.toml
+# ─────────────────────────────────────────────────────────────────
+# Netlify deployment configuration for Earth's Climate Exhibition.
+# This is a pure static site — no build command needed.
+# ─────────────────────────────────────────────────────────────────
+
+[build]
+  # No build step — the files are already plain HTML/CSS/JS.
+  # Netlify will just upload everything in this folder.
+  publish = "."
+
+# ── HEADERS ──────────────────────────────────────────────────────
+# Service workers must be served with Cache-Control: no-cache
+# so browsers always check for an updated worker.
+
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+    Service-Worker-Allowed = "/"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+# ── REDIRECTS ─────────────────────────────────────────────────────
+# Ensure the root URL serves index.html
+[[redirects]]
+  from = "/"
+  to = "/index.html"
+  status = 200

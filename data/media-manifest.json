@@ -1,0 +1,89 @@
+﻿[
+  {
+    "file": "assets/images/global-energy-budget.jpg",
+    "type": "image",
+    "source": "NASA Science — The Greenhouse Effect, Simplified",
+    "credit": "NASA/JPL-Caltech",
+    "licence": "NASA images available for educational use with attribution.",
+    "altOrCaption": "Earth's energy budget diagram showing incoming solar radiation (340.4 W/m²), outgoing infrared radiation (239.9 W/m²), greenhouse-gas back radiation, thermals, and latent heat. All values in W/m².",
+    "approved": true,
+    "approvedSlide": "slide-energy-balance",
+    "approvedSlot": "greenhouse-media",
+    "placementStatus": "PLACED IN SLIDE 4"
+  },
+  {
+    "file": "assets/images/manabe.jpg",
+    "type": "image",
+    "source": "Nobel Prize 2021 Laureates",
+    "credit": "Nobel Prize Outreach",
+    "licence": "Nobel Prize Outreach media — verify usage rights for final submission.",
+    "altOrCaption": "Syukuro Manabe holding the Nobel Prize in Physics 2021 medal.",
+    "approved": true,
+    "approvedSlide": "slide-manabe",
+    "approvedSlot": "manabe-media",
+    "placementStatus": "PLACED IN SLIDE 8"
+  },
+  {
+    "file": "assets/images/hasselmann.jpg",
+    "type": "image",
+    "source": "Nobel Prize 2021 Laureates",
+    "credit": "© Johan Jarnestad / The Royal Swedish Academy of Sciences",
+    "licence": "© Johan Jarnestad / The Royal Swedish Academy of Sciences — credit required.",
+    "altOrCaption": "Klaus Hasselmann holding the Nobel Prize in Physics 2021 medal.",
+    "approved": true,
+    "approvedSlide": "slide-hasselmann",
+    "approvedSlot": "hasselmann-media",
+    "placementStatus": "PLACED IN SLIDE 9"
+  },
+  {
+    "file": "assets/images/extreme-weather-events.jpg",
+    "type": "image",
+    "source": "gpm.nasa.gov",
+    "credit": "NASA/GISS",
+    "licence": "NASA images available for educational use with attribution.",
+    "altOrCaption": "Composite of photographs showing extreme weather events including a tornado, storm clouds, and flooding roads.",
+    "approved": true,
+    "approvedSlide": "slide-feedbacks",
+    "approvedSlot": "feedbacks-media",
+    "placementStatus": "PLACED IN SLIDE 10"
+  },
+  {
+    "file": "assets/videos/greenhouse-effect.mp4",
+    "type": "video",
+    "durationSeconds": 17.05,
+    "source": "NASA Science — The Greenhouse Effect, Simplified",
+    "credit": "NASA/JPL-Caltech",
+    "licence": "NASA media available for educational use with attribution.",
+    "altOrCaption": "Short visual explanation of how greenhouse gases interact with outgoing heat.",
+    "approved": true,
+    "approvedSlide": "slide-energy-balance",
+    "approvedSlot": "greenhouse-media",
+    "placementStatus": "PLACED IN SLIDE 4"
+  },
+  {
+    "file": "assets/videos/climate-spiral.mp4",
+    "type": "video",
+    "durationSeconds": 20.02,
+    "source": "NASA Climate Spiral 1880–Present",
+    "credit": "NASA Scientific Visualization Studio; data: NASA GISS",
+    "licence": "NASA SVS — educational use with attribution. URL: https://svs.gsfc.nasa.gov/5057/",
+    "altOrCaption": "Historical global temperature anomalies visualized from the NASA GISTEMP record. This is historical evidence, not a future projection.",
+    "approved": true,
+    "approvedSlide": "slide-evidence",
+    "approvedSlot": "evidence-video-card",
+    "placementStatus": "PLACED IN SLIDE 6"
+  },
+  {
+    "file": "assets/videos/climate-change.mp4",
+    "type": "video",
+    "durationSeconds": 11.5,
+    "source": "NASA Global Temperature Indicator",
+    "credit": "NASA/GISS",
+    "licence": "NASA media available for educational use with attribution.",
+    "altOrCaption": "NASA Global Temperature Indicator — historical surface temperature observations.",
+    "approved": true,
+    "approvedSlide": "slide-evidence",
+    "approvedSlot": "evidence-atmosphere-media",
+    "placementStatus": "PLACED IN SLIDE 6"
+  }
+]

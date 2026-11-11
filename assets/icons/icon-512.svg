@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Earth's Climate exhibition icon">
+  <!-- Background -->
+  <rect width="512" height="512" rx="96" fill="#080f1f"/>
+  <!-- Globe circle -->
+  <circle cx="256" cy="256" r="160" fill="none" stroke="#38bdf8" stroke-width="10"/>
+  <!-- Equator -->
+  <ellipse cx="256" cy="256" rx="160" ry="52" fill="none" stroke="#38bdf8" stroke-width="5" opacity="0.5"/>
+  <!-- Vertical meridian -->
+  <line x1="256" y1="96" x2="256" y2="416" stroke="#38bdf8" stroke-width="5" opacity="0.5"/>
+  <!-- Extra latitude line (upper) -->
+  <ellipse cx="256" cy="192" rx="136" ry="34" fill="none" stroke="#38bdf8" stroke-width="3" opacity="0.3"/>
+  <!-- Extra latitude line (lower) -->
+  <ellipse cx="256" cy="320" rx="136" ry="34" fill="none" stroke="#38bdf8" stroke-width="3" opacity="0.3"/>
+  <!-- Warming trend line (red-orange) -->
+  <polyline
+    points="122,318 166,298 210,286 254,264 298,234 342,200 390,162"
+    fill="none"
+    stroke="#f97316"
+    stroke-width="10"
+    stroke-linecap="round"
+    stroke-linejoin="round"/>
+  <!-- Sun (amber) -->
+  <circle cx="406" cy="112" r="34" fill="#f5a623"/>
+  <line x1="406" y1="64"  x2="406" y2="48"  stroke="#f5a623" stroke-width="7" stroke-linecap="round"/>
+  <line x1="406" y1="160" x2="406" y2="176" stroke="#f5a623" stroke-width="7" stroke-linecap="round"/>
+  <line x1="358" y1="112" x2="342" y2="112" stroke="#f5a623" stroke-width="7" stroke-linecap="round"/>
+  <line x1="454" y1="112" x2="470" y2="112" stroke="#f5a623" stroke-width="7" stroke-linecap="round"/>
+  <line x1="372" y1="78"  x2="361" y2="67"  stroke="#f5a623" stroke-width="6" stroke-linecap="round"/>
+  <line x1="440" y1="146" x2="451" y2="157" stroke="#f5a623" stroke-width="6" stroke-linecap="round"/>
+  <line x1="440" y1="78"  x2="451" y2="67"  stroke="#f5a623" stroke-width="6" stroke-linecap="round"/>
+  <line x1="372" y1="146" x2="361" y2="157" stroke="#f5a623" stroke-width="6" stroke-linecap="round"/>
+  <!-- Nobel Prize "NP" text -->
+  <text x="256" y="468" font-family="Arial,sans-serif" font-size="36" font-weight="bold"
+        fill="#a8b8d0" text-anchor="middle" letter-spacing="4">NOBEL 2021</text>
+</svg>

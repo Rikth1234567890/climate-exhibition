@@ -1,0 +1,562 @@
+/*
+ * layout.css
+ * ─────────────────────────────────────────────────────────────────
+ * Page-level layout: top bar, main container, slides, and scroll snap.
+ * Also handles responsive adjustments for smaller screens.
+ * ─────────────────────────────────────────────────────────────────
+ */
+
+
+/* ── TOP BAR ────────────────────────────────────────────────────── */
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--topbar-height);
+  z-index: var(--z-topbar);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: 0 var(--space-8);
+
+  background: var(--color-topbar-bg);
+  border-bottom: 1px solid var(--color-topbar-border);
+  box-shadow: var(--shadow-md);
+
+  /* Subtle frosted-glass look (safe fallback: solid dark bg above) */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.topbar__title {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text-primary);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── SECTION MENU (placeholder, populated by JS) ───────────────── */
+.section-menu {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.section-menu__item {
+  /* Individual menu items styled in components.css */
+}
+
+/* Hamburger / nav toggle — visible on small screens */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-sm);
+  padding: var(--space-1) var(--space-2);
+  color: var(--color-text-primary);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background var(--duration-fast) var(--ease-out);
+}
+
+.nav-toggle:hover {
+  background: var(--color-bg-elevated);
+}
+
+/* Slide counter e.g. "3 / 11" */
+.slide-counter {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+}
+
+
+/* ── MAIN SCROLL CONTAINER ──────────────────────────────────────── */
+main {
+  /* Push content below the fixed top bar */
+  padding-top: var(--topbar-height);
+}
+
+
+/* ── SLIDES ─────────────────────────────────────────────────────── */
+.slide {
+  /*
+   * Full viewport height.
+   * We subtract the top bar so content is never hidden behind it.
+   * calc(100vh - topbar-height) keeps each slide exactly one screen.
+   */
+  min-height: calc(100vh - var(--topbar-height));
+  height:     calc(100vh - var(--topbar-height));
+
+  /* Scroll snap: each slide locks to the viewport on scroll         */
+  scroll-snap-align: start;
+  scroll-snap-stop: always;  /* prevents skipping slides on trackpad */
+
+  /* Inner layout */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  position: relative;
+  overflow: hidden;         /* clip decorative backgrounds           */
+
+  /* Content padding */
+  padding: var(--slide-padding-y) var(--slide-padding-x);
+
+  /* Alternating surface colours for visual rhythm */
+  background: var(--color-bg-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/*
+ * .slide--content
+ * ─────────────────────────────────────────────────────────────────
+ * Override for content-heavy slides (2, 3, 4 and future slides).
+ * These have more content than one viewport can display, so we:
+ *  - remove the fixed height so the slide grows to fit its content
+ *  - remove overflow: hidden so nothing is clipped
+ *  - align content to the top instead of centre
+ *  - reduce top/bottom padding to give content more room
+ *
+ * scroll-snap-align: start is preserved — the snap point is the
+ * top edge of the slide, which still works with auto height.
+ * ─────────────────────────────────────────────────────────────────
+ */
+.slide--content {
+  height: auto;
+  min-height: calc(100vh - var(--topbar-height));
+  overflow: visible;
+  justify-content: flex-start;
+  padding-top: var(--space-10);
+  padding-bottom: calc(var(--space-16) + 3rem); /* clear the bottom nav bar */
+}
+
+/* Alternate every other slide for visual rhythm */
+.slide:nth-child(even) {
+  background: var(--color-bg-base);
+}
+
+/* Content wrapper — centred, max-width constrained */
+.slide__inner {
+  width: 100%;
+  max-width: var(--max-width-slide);
+  margin: 0 auto;
+  position: relative;
+  z-index: var(--z-raised);
+}
+
+/* Slide number badge (top-left decorative) */
+.slide__number {
+  position: absolute;
+  top: var(--space-6);
+  left: var(--space-6);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  letter-spacing: 0.1em;
+  user-select: none;
+}
+
+/* Slide label below the number (e.g. "SLIDE 03") */
+.slide__number::before {
+  content: "SLIDE ";
+}
+
+
+/* ── SLIDE BACKGROUND DECORATION LAYER ─────────────────────────── */
+/*
+ * Each slide can have a purely decorative SVG/gradient layer
+ * behind the content. Set via a utility class or inline style.
+ */
+.slide__bg {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-base);
+  pointer-events: none;
+  opacity: 0.08;        /* very subtle — won't compete with text     */
+}
+
+
+/* ── PROGRESS INDICATOR (vertical dots on right edge) ───────────── */
+.progress-nav {
+  position: fixed;
+  right: var(--space-6);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: var(--z-raised);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.progress-nav__dot {
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-border-light);
+  cursor: pointer;
+  transition: background var(--duration-normal) var(--ease-out),
+              transform  var(--duration-normal) var(--ease-out);
+}
+
+.progress-nav__dot:hover,
+.progress-nav__dot[aria-current="true"] {
+  background: var(--color-cyan);
+  transform: scale(1.4);
+}
+
+.progress-nav__dot[aria-current="true"] {
+  box-shadow: var(--glow-cyan);
+}
+
+
+/* ── RESPONSIVE BREAKPOINTS ─────────────────────────────────────── */
+
+/* Tablet — 900 px and below */
+@media (max-width: 900px) {
+  :root {
+    --slide-padding-x: var(--space-10);
+    --slide-padding-y: var(--space-10);
+  }
+
+  .topbar__title {
+    font-size: var(--text-xs);
+  }
+
+  /* Show hamburger, hide full menu */
+  .nav-toggle {
+    display: flex;
+  }
+
+  .section-menu {
+    /* Will be shown/hidden by JS */
+    display: none;
+    position: fixed;
+    top: var(--topbar-height);
+    left: 0;
+    right: 0;
+    background: var(--color-topbar-bg);
+    border-bottom: 1px solid var(--color-topbar-border);
+    padding: var(--space-4) var(--space-8);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+    box-shadow: var(--shadow-md);
+  }
+
+  .section-menu.is-open {
+    display: flex;
+  }
+
+  /* Hide side dots on tablet */
+  .progress-nav {
+    display: none;
+  }
+}
+
+/* Mobile — 600 px and below */
+@media (max-width: 600px) {
+  :root {
+    --slide-padding-x: var(--space-6);
+    --slide-padding-y: var(--space-8);
+    --topbar-height: 3rem;
+  }
+
+  h1 { font-size: var(--text-2xl); }
+  h2 { font-size: var(--text-xl);  }
+  h3 { font-size: var(--text-lg);  }
+
+  .slide__number {
+    top: var(--space-4);
+    left: var(--space-4);
+  }
+}
+
+
+/* ── PREV / NEXT CONTROL BAR ────────────────────────────────────
+ * Fixed bar at the bottom of the viewport.
+ * Provides large, clearly labelled Prev / Next buttons for
+ * classroom use where keyboard shortcuts may be unfamiliar.
+ * ─────────────────────────────────────────────────────────────── */
+.slide-controls {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-topbar);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-3) var(--space-8);
+
+  background: var(--color-topbar-bg);
+  border-top: 1px solid var(--color-topbar-border);
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* ── BUTTONS ── */
+.slide-controls__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-6);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-elevated);
+  color: var(--color-text-primary);
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  min-width: 7rem;           /* large enough target for a presenter */
+  transition: background   var(--duration-fast) var(--ease-out),
+              border-color var(--duration-fast) var(--ease-out),
+              color        var(--duration-fast) var(--ease-out),
+              transform    var(--duration-fast) var(--ease-out);
+  user-select: none;
+}
+
+.slide-controls__btn:hover:not(:disabled) {
+  background: var(--color-bg-overlay);
+  border-color: var(--color-cyan);
+  color: var(--color-cyan-light);
+}
+
+.slide-controls__btn:focus-visible {
+  outline: 2px solid var(--color-cyan);
+  outline-offset: 3px;
+}
+
+.slide-controls__btn:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+/* Disabled state — first / last slide */
+.slide-controls__btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Arrow glyphs */
+.slide-controls__arrow {
+  font-size: var(--text-md);
+  line-height: 1;
+}
+
+/* Label — hidden on very small screens to save space */
+.slide-controls__label {
+  /* always visible unless explicitly hidden below */
+}
+
+/* ── CENTRE COUNTER ── */
+.slide-controls__counter {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  letter-spacing: 0.08em;
+  min-width: 4rem;
+  text-align: center;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+/* ── MAKE ROOM FOR THE CONTROL BAR ──
+ * Push the last slide up so its content is not hidden behind
+ * the fixed bottom bar.
+ */
+main {
+  padding-bottom: calc(2.75rem + var(--space-6)); /* bar height + gap */
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  .slide-controls {
+    padding: var(--space-2) var(--space-4);
+    gap: var(--space-2);
+  }
+
+  .slide-controls__btn {
+    min-width: 5rem;
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--text-xs);
+  }
+
+  /* Hide text label, keep arrow on tiny screens */
+  .slide-controls__label {
+    display: none;
+  }
+
+  .slide-controls__counter {
+    font-size: var(--text-xs);
+  }
+}
+
+
+/* ================================================================
+   LAYOUT AUDIT — Phase refinement
+   These rules unify spacing, prevent overflow, and ensure the
+   slide number badge never overlaps content on any slide.
+   ================================================================ */
+
+/* Use svh (small viewport height) where supported so mobile browser
+   chrome doesn't cut off content. Falls back to vh. */
+@supports (min-height: 100svh) {
+  .slide {
+    min-height: calc(100svh - var(--topbar-height));
+    height:     calc(100svh - var(--topbar-height));
+  }
+  .slide--content {
+    min-height: calc(100svh - var(--topbar-height));
+  }
+  .title-slide__inner {
+    min-height: calc(100svh - var(--topbar-height));
+  }
+}
+
+/* ── Prevent horizontal overflow globally ───────────────────────── */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* Slide inner is always safely contained */
+.slide__inner {
+  overflow-x: hidden;
+}
+
+/* ── Slide number badge: push below topbar correctly ───────────── */
+/* The .slide--content class already handles padding-top; the fixed
+   number badge only needs to stay inside the visible area. */
+.slide--content .slide__number {
+  /* Keep it at the top of the slide area but below the absolute top */
+  top: var(--space-4);
+}
+
+/* ── All interactive elements: consistent focus ring ───────────── */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+[role="tab"]:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid var(--color-cyan);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* ── Card consistency: ensure all card-style elements share
+   the same base border-radius ────────────────────────────────── */
+.wc-card,
+.cs-info-panel,
+.evidence-card,
+.ev-panel,
+.pipeline-panel,
+.sequence-panel,
+.feedback-panel,
+.scenario-panel,
+.sn-explain-panel,
+.data-preview-card,
+.conclusion-statement {
+  border-radius: var(--radius-md);
+}
+
+/* ── Narrow screen: prevent grid overflow ───────────────────────── */
+@media (max-width: 768px) {
+  .wc-columns,
+  .cs-layout,
+  .gh-cards,
+  .causes-columns,
+  .evidence-grid,
+  .evidence-panels,
+  .models-cards-row,
+  .scientist-profile,
+  .feedback-cards,
+  .uncertainty-cards,
+  .scenario-cards,
+  .conclusion-pillars {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Evidence explorer: panels fill width */
+  .ev-panel__layout {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Pipeline tabs: allow scroll */
+  .pipeline-tabs {
+    overflow-x: auto;
+  }
+
+  /* Signal noise SVG: cap height on small screens */
+  .signal-noise-svg {
+    max-height: 140px;
+  }
+}
+
+/* ── Phone: 390px adjustments ───────────────────────────────────── */
+@media (max-width: 430px) {
+  :root {
+    --slide-padding-x: var(--space-4);
+    --slide-padding-y: var(--space-6);
+  }
+
+  .slide-title,
+  .slide--content .slide-title {
+    font-size: var(--text-lg) !important;
+  }
+
+  .slide-intro,
+  .slide--content .slide-intro {
+    font-size: 0.9rem !important;
+  }
+
+  /* Controls bar: very compact */
+  .slide-controls {
+    padding: var(--space-2) var(--space-3);
+  }
+}
+
+/* ── Topbar: prevent title from pushing nav off screen ─────────── */
+@media (max-width: 1024px) {
+  .topbar__title {
+    max-width: 40%;
+  }
+}
+
+/* ── Source lines: always readable but understated ─────────────── */
+.slide-source {
+  font-size: max(var(--text-xs), 10px);
+  line-height: var(--leading-relaxed);
+}
+
+/* ── Progress nav: keep centred relative to slide area only ─────── */
+@media (max-width: 1100px) {
+  .progress-nav {
+    right: var(--space-3);
+  }
+}

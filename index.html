@@ -1,0 +1,3460 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!--
+    ================================================================
+    HEAD — metadata, styles, and no external requests.
+    Every resource referenced here is a local file.
+    Safe for file:// (no server needed).
+    ================================================================
+  -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Descriptive title for browser tab and screen readers -->
+  <title>Climate Evidence Exhibition</title>
+
+  <!--
+    META DESCRIPTION — describes the page for anyone who opens
+    the HTML source (and for future search indexing if ever hosted).
+  -->
+  <meta name="description"
+        content="A visual physics class exhibition on the 2021 Nobel Prize in
+                 Physics: Syukuro Manabe and Klaus Hasselmann's contributions
+                 to Earth's climate science and global warming prediction." />
+
+  <!-- Author -->
+  <meta name="author" content="B.Tech Physics Exhibition, 2026" />
+
+  <!-- Prevent caching issues when opening from file system -->
+  <meta http-equiv="Cache-Control" content="no-cache" />
+
+  <!--
+    ── PWA / MOBILE META TAGS ───────────────────────────────────────
+    These make the site installable on Android/iOS and set the
+    browser chrome colour to match the dark theme.
+    All referenced files are local — no external URLs.
+  -->
+
+  <!-- Web App Manifest (PWA) -->
+  <link rel="manifest" href="manifest.webmanifest" />
+
+  <!-- Theme colour for Android Chrome address bar -->
+  <meta name="theme-color" content="#080f1f" />
+
+  <!-- iOS / Safari home-screen icon and status bar -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Earth's Climate" />
+  <link rel="apple-touch-icon" href="assets/icons/icon-192.svg" />
+
+  <!-- Microsoft Tiles (Edge / Windows) -->
+  <meta name="msapplication-TileColor" content="#080f1f" />
+
+  <!--
+    ── STYLESHEETS (local only — no CDN, no external URLs) ──────────
+    Load order matters:
+    1. variables  — defines all tokens (colours, sizes, etc.)
+    2. base       — resets + element defaults
+    3. layout     — page structure, top bar, slides
+    4. components — reusable UI components
+  -->
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+
+</head>
+
+<body>
+
+  <!-- ── SKIP LINK (accessibility: lets keyboard users jump to content) -->
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- ================================================================
+       TOP BAR
+       Fixed navigation bar visible on all slides.
+       ================================================================ -->
+  <header role="banner">
+    <nav class="topbar" aria-label="Site navigation">
+
+      <!-- Project title (abbreviated for small screens via CSS truncation) -->
+      <span class="topbar__title"
+            aria-label="Earth's Climate &amp; Reliable Prediction of Global Warming">
+        Earth's Climate &amp; Reliable Prediction of Global Warming
+      </span>
+
+      <!-- Slide counter — updated by main.js -->
+      <span class="slide-counter" aria-live="polite" aria-atomic="true">
+        1 / 11
+      </span>
+
+      <!--
+        Section menu — links to each slide.
+        On small screens this collapses behind the nav-toggle button.
+        aria-label gives screen readers context for this nav region.
+      -->
+      <ul class="section-menu" role="list" aria-label="Slide sections">
+
+        <li class="section-menu__item">
+          <a class="section-menu__link" href="#slide-title"
+             aria-current="true">Title</a>
+        </li>
+        <li class="section-menu__item">
+          <a class="section-menu__link" href="#slide-weather-vs-climate">
+            Weather vs Climate</a>
+        </li>
+        <li class="section-menu__item">
+          <a class="section-menu__link" href="#slide-climate-system">
+            Climate System</a>
+        </li>
+        <li class="section-menu__item">
+          <a class="section-menu__link" href="#slide-energy-balance">
+            Energy Balance</a>
+        </li>
+        <li class="section-menu__item">
+          <a class="section-menu__link" href="#slide-natural-vs-human">
+            Causes</a>
+        </li>
+        <li class="section-menu__item">
+          <a class="section-menu__link" href="#slide-evidence">
+            Evidence</a>
+        </li>
+        <li class="section-menu__item">
+          <a class="section-menu__link" href="#slide-models">
+            Models</a>
+        </li>
+        <li class="section-menu__item">
+          <a class="section-menu__link" href="#slide-manabe">
+            Manabe</a>
+        </li>
+        <li class="section-menu__item">
+          <a class="section-menu__link" href="#slide-hasselmann">
+            Hasselmann</a>
+        </li>
+        <li class="section-menu__item">
+          <a class="section-menu__link" href="#slide-feedbacks">
+            Feedbacks</a>
+        </li>
+        <li class="section-menu__item">
+          <a class="section-menu__link" href="#slide-conclusion">
+            Conclusion</a>
+        </li>
+
+      </ul><!-- /.section-menu -->
+
+      <!-- Mobile hamburger button — shown via CSS on small screens -->
+      <button class="nav-toggle"
+              aria-label="Open section menu"
+              aria-expanded="false"
+              aria-controls="section-menu">
+        ☰
+      </button>
+
+    </nav>
+  </header>
+
+
+  <!-- ================================================================
+       VERTICAL PROGRESS DOTS (right edge)
+       The <ul> is populated by main.js at page load.
+       ================================================================ -->
+  <ul class="progress-nav" aria-label="Slide progress"></ul>
+
+
+  <!-- ================================================================
+       MAIN CONTENT
+       One <section class="slide"> per topic.
+       Each is exactly one full viewport height (via CSS scroll-snap).
+
+       Naming conventions used here:
+         id          = machine-readable anchor (used by nav links + JS)
+         aria-label  = human-readable description (used by screen readers)
+         data-slide  = numeric index starting at 1 (used by JS + CSS)
+       ================================================================ -->
+  <main id="main-content" aria-label="Exhibition slides">
+
+    <!-- ── SLIDE 1: Title ──────────────────────────────────────── -->
+    <section
+      class="slide slide--title"
+      id="slide-title"
+      aria-label="Title"
+      data-slide="1">
+
+      <span class="slide__number" aria-hidden="true">01</span>
+
+      <!-- Animated star-field background (purely decorative, aria-hidden) -->
+      <div class="title-stars" aria-hidden="true">
+        <!-- JS populates this with sparkle dots on load -->
+      </div>
+
+      <!-- Orbital ring decoration -->
+      <div class="title-ring title-ring--outer" aria-hidden="true"></div>
+      <div class="title-ring title-ring--inner" aria-hidden="true"></div>
+
+      <div class="slide__inner title-slide__inner">
+
+        <!-- Nobel prize year badge -->
+        <div class="title-badge" aria-hidden="true">
+          <span class="title-badge__year">2021</span>
+          <span class="title-badge__label">Nobel Prize in Physics</span>
+        </div>
+
+        <!-- Main title block -->
+        <div class="title-block">
+
+          <!-- Animated eyebrow line -->
+          <p class="title-eyebrow">
+            <span class="title-eyebrow__line" aria-hidden="true"></span>
+            <span class="title-eyebrow__text">Earth System Science &nbsp;&bull;&nbsp; B.Tech Physics Exhibition</span>
+            <span class="title-eyebrow__line" aria-hidden="true"></span>
+          </p>
+
+          <!-- Primary display title -->
+          <h1 class="title-display">
+            <span class="title-display__line title-display__line--1">
+              Earth&rsquo;s Climate
+            </span>
+            <span class="title-display__line title-display__line--2">
+              &amp; Reliable Prediction
+            </span>
+            <span class="title-display__line title-display__line--3">
+              of Global Warming
+            </span>
+          </h1>
+
+          <!-- Animated gradient underline -->
+          <div class="title-underline" aria-hidden="true"></div>
+
+          <!-- Subtitle -->
+          <p class="title-subtitle">
+            How climate science explains the past, models the present,
+            and projects the future of Earth&rsquo;s temperature.
+          </p>
+
+        </div><!-- /.title-block -->
+
+        <!-- Laureate names -->
+        <div class="title-laureates" aria-label="2021 Nobel Laureates in Physics">
+
+          <div class="title-laureate">
+            <!-- Globe SVG icon -->
+            <svg class="title-laureate__icon" viewBox="0 0 48 48"
+                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+              <circle cx="24" cy="24" r="20" fill="none" stroke="#38bdf8" stroke-width="1.5"/>
+              <ellipse cx="24" cy="24" rx="20" ry="8" fill="none" stroke="#38bdf8"
+                       stroke-width="1" opacity="0.5"/>
+              <line x1="24" y1="4" x2="24" y2="44" stroke="#38bdf8"
+                    stroke-width="1" opacity="0.5"/>
+              <ellipse cx="24" cy="24" rx="12" ry="20" fill="none" stroke="#38bdf8"
+                       stroke-width="1" opacity="0.3"/>
+            </svg>
+            <div class="title-laureate__info">
+              <span class="title-laureate__name">Syukuro Manabe</span>
+              <span class="title-laureate__detail">Physical climate modelling</span>
+            </div>
+          </div>
+
+          <div class="title-laureate__divider" aria-hidden="true">&amp;</div>
+
+          <div class="title-laureate">
+            <svg class="title-laureate__icon" viewBox="0 0 48 48"
+                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+              <!-- Signal / wave icon for Hasselmann's stochastic work -->
+              <path d="M4,24 Q10,12 16,24 Q22,36 28,24 Q34,12 40,24 Q43,30 44,24"
+                    fill="none" stroke="#f5a623" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="24" cy="24" r="3" fill="#f5a623" opacity="0.7"/>
+            </svg>
+            <div class="title-laureate__info">
+              <span class="title-laureate__name">Klaus Hasselmann</span>
+              <span class="title-laureate__detail">Climate variability &amp; attribution</span>
+            </div>
+          </div>
+
+        </div><!-- /.title-laureates -->
+
+        <!-- Scroll prompt -->
+        <div class="title-scroll-hint" aria-label="Scroll down to begin">
+          <span class="title-scroll-hint__text">Scroll to explore</span>
+          <span class="title-scroll-hint__arrow" aria-hidden="true">&#8595;</span>
+        </div>
+
+      </div><!-- /.slide__inner -->
+
+    </section>
+
+
+    <!-- ── SLIDE 2: Weather vs Climate ────────────────────────── -->
+    <section
+      class="slide slide--content"
+      id="slide-weather-vs-climate"
+      aria-label="Weather vs Climate"
+      data-slide="2">
+
+      <span class="slide__number" aria-hidden="true">02</span>
+
+      <div class="slide__inner">
+
+        <!-- Eyebrow -->
+        <span class="slide-eyebrow" aria-hidden="true">01 / FOUNDATIONS</span>
+
+        <!-- Heading -->
+        <h2 class="slide-title" data-anim>
+          Weather changes quickly. Climate changes over time.
+        </h2>
+
+        <!-- Lead paragraph -->
+        <p class="slide-intro" data-anim>
+          Weather describes atmospheric conditions over short periods.
+          Climate describes long-term patterns and averages, usually considered
+          over several decades.
+        </p>
+
+        <!-- Two-column comparison cards -->
+        <div class="wc-columns" data-anim>
+
+          <div class="wc-card wc-card--weather">
+            <div class="wc-card__label">Weather</div>
+            <h3 class="wc-card__heading">What is happening now?</h3>
+            <p class="wc-card__body">
+              Rain, wind, clouds, temperature, and storms can change from minutes
+              to days and weeks.
+            </p>
+          </div>
+
+          <div class="wc-card wc-card--climate">
+            <div class="wc-card__label">Climate</div>
+            <h3 class="wc-card__heading">What is typical over time?</h3>
+            <p class="wc-card__body">
+              Climate describes patterns in temperature, rainfall, humidity, and
+              other conditions over a long period, commonly 30 years or more.
+            </p>
+          </div>
+
+        </div><!-- /.wc-columns -->
+
+        <!-- Conceptual SVG chart -->
+        <div class="wc-visual-wrap" data-anim>
+          <div class="wc-chart-label">Conceptual illustration &mdash; not measured data.</div>
+
+          <!--
+            SVG: horizontal axis = time, two lines.
+            All path coordinates are illustrative only — no real data.
+            viewBox 0 0 600 180: width=600, height=180.
+          -->
+          <svg
+            viewBox="0 0 600 180"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-labelledby="wc-chart-title wc-chart-desc"
+            focusable="false">
+
+            <title id="wc-chart-title">Conceptual chart: weather variability versus climate trend</title>
+            <desc id="wc-chart-desc">
+              A conceptual illustration showing a thin irregular cyan line representing
+              day-to-day weather variability, and a smooth amber line representing the
+              long-term climate pattern. The axes are labelled Time (horizontal) and
+              Relative value (vertical). No measured data is shown.
+            </desc>
+
+            <!-- Axes -->
+            <!-- Y axis -->
+            <line x1="48" y1="10" x2="48" y2="150" stroke="#2a4a80" stroke-width="1.5"/>
+            <!-- X axis -->
+            <line x1="48" y1="150" x2="590" y2="150" stroke="#2a4a80" stroke-width="1.5"/>
+
+            <!-- Y-axis label -->
+            <text
+              x="14" y="90"
+              font-family="Consolas, monospace"
+              font-size="11"
+              fill="#6a80a0"
+              text-anchor="middle"
+              transform="rotate(-90 14 90)">Relative value</text>
+
+            <!-- X-axis label -->
+            <text
+              x="320" y="170"
+              font-family="Consolas, monospace"
+              font-size="11"
+              fill="#6a80a0"
+              text-anchor="middle">Time</text>
+
+            <!--
+              Irregular cyan line — daily weather variability.
+              Points are hand-crafted to look naturally noisy.
+            -->
+            <polyline
+              class="wc-line-weather"
+              points="
+                52,110  62,88   72,120  82,75   92,105
+               102,65  112,95  122,55  132,90  142,70
+               152,100 162,60  172,115 182,50  192,95
+               202,80  212,120 222,55  232,100 242,65
+               252,110 262,70  272,105 282,50  292,90
+               302,65  312,100 322,55  332,80  342,110
+               352,60  362,95  372,55  382,100 392,70
+               402,105 412,60  422,90  432,50  442,85
+               452,110 462,55  472,100 482,65  492,95
+               502,50  512,85  522,55  532,80  542,100
+               552,60  562,90  572,55  582,80"
+              fill="none"
+              stroke="#38bdf8"
+              stroke-width="1.5"
+              stroke-linejoin="round"
+              stroke-linecap="round"
+              opacity="0.75"/>
+
+            <!--
+              Smooth amber line — long-term climate pattern.
+              Uses a cubic bezier curve to look like a gentle trend.
+            -->
+            <path
+              class="wc-line-climate"
+              d="M 52,105 C 150,100 250,95 350,88 C 450,81 540,76 582,73"
+              fill="none"
+              stroke="#f5a623"
+              stroke-width="3"
+              stroke-linecap="round"/>
+
+            <!-- Inline labels on the chart -->
+            <text x="58" y="45"
+              font-family="Consolas, monospace"
+              font-size="10"
+              fill="#38bdf8"
+              opacity="0.9">Daily weather variability</text>
+
+            <text x="400" y="62"
+              font-family="Consolas, monospace"
+              font-size="10"
+              fill="#f5a623">Long-term climate pattern</text>
+
+          </svg>
+
+          <!-- Legend below the chart -->
+          <div class="wc-legend" aria-hidden="true">
+            <span class="wc-legend__item">
+              <span class="wc-legend__swatch wc-legend__swatch--weather"></span>
+              Daily weather variability
+            </span>
+            <span class="wc-legend__item">
+              <span class="wc-legend__swatch wc-legend__swatch--climate"></span>
+              Long-term climate pattern
+            </span>
+          </div>
+
+        </div><!-- /.wc-visual-wrap -->
+
+        <!-- Callout box -->
+        <div class="callout callout--info" data-anim>
+          <span class="callout__icon" aria-hidden="true">&#128161;</span>
+          <div class="callout__content">
+            <div class="callout__title">Key idea</div>
+            <p class="callout__text">
+              One unusual day does not define a climate trend. Climate science looks
+              for patterns across longer periods.
+            </p>
+          </div>
+        </div>
+
+        <!-- Tags and source -->
+        <div class="slide-tags" data-anim>
+          <span class="badge badge--cyan">Concept</span>
+        </div>
+
+        <p class="slide-source" data-anim>
+          Source: NASA Science, &ldquo;What&rsquo;s the difference between weather and climate?&rdquo;
+        </p>
+
+      </div><!-- /.slide__inner -->
+
+    </section>
+
+
+    <!-- ── SLIDE 3: Climate System ─────────────────────────────── -->
+    <section
+      class="slide slide--content"
+      id="slide-climate-system"
+      aria-label="The Climate System"
+      data-slide="3">
+
+      <span class="slide__number" aria-hidden="true">03</span>
+
+      <div class="slide__inner">
+
+        <!-- Eyebrow -->
+        <span class="slide-eyebrow" aria-hidden="true">02 / THE SYSTEM</span>
+
+        <!-- Heading -->
+        <h2 class="slide-title" data-anim>
+          Earth&rsquo;s climate is a connected system.
+        </h2>
+
+        <!-- Lead paragraph -->
+        <p class="slide-intro" data-anim>
+          Climate emerges from interactions among the atmosphere, ocean, land,
+          ice, and living organisms. Energy and matter move continuously between
+          these parts of the Earth system.
+        </p>
+
+        <!-- Component-selection buttons -->
+        <div class="cs-buttons" role="group" aria-label="Select a climate system component" data-anim>
+          <button class="cs-btn" type="button" data-system="atmosphere" aria-pressed="false">
+            Atmosphere
+          </button>
+          <button class="cs-btn" type="button" data-system="ocean" aria-pressed="false">
+            Ocean
+          </button>
+          <button class="cs-btn" type="button" data-system="land" aria-pressed="false">
+            Land
+          </button>
+          <button class="cs-btn" type="button" data-system="ice" aria-pressed="false">
+            Ice
+          </button>
+          <button class="cs-btn" type="button" data-system="biosphere" aria-pressed="false">
+            Biosphere
+          </button>
+        </div>
+
+        <!-- Two-column: diagram + info panel -->
+        <div class="cs-layout" data-anim>
+
+          <!-- Left: inline SVG diagram -->
+          <div class="cs-diagram-wrap" aria-hidden="true">
+            <!--
+              Inline SVG: simplified Earth at centre with five labelled nodes.
+              viewBox 0 0 320 300.
+              Coordinates are illustrative — no real geographic projection.
+              All text is decorative (aria-hidden on the wrapper).
+            -->
+            <svg
+              id="cs-diagram"
+              viewBox="0 0 320 300"
+              xmlns="http://www.w3.org/2000/svg"
+              focusable="false">
+
+              <title>Climate system diagram</title>
+              <desc>
+                A simplified conceptual diagram showing the five components of
+                Earth's climate system — atmosphere, ocean, land, ice, and
+                biosphere — connected to a central Earth globe.
+              </desc>
+
+              <!-- Central Earth globe -->
+              <circle cx="160" cy="150" r="38" fill="#0d1a35" stroke="#1e3560" stroke-width="2"/>
+              <!-- Rough continent shapes on the globe (purely decorative) -->
+              <ellipse cx="150" cy="143" rx="14" ry="10" fill="#132144" opacity="0.9"/>
+              <ellipse cx="170" cy="158" rx="10" ry="7"  fill="#132144" opacity="0.9"/>
+              <!-- Globe label -->
+              <text x="160" y="154"
+                font-family="Segoe UI,Arial,sans-serif"
+                font-size="9"
+                fill="#a8b8d0"
+                text-anchor="middle">Earth</text>
+
+              <!-- ── ATMOSPHERE node (top centre) ── -->
+              <!-- Connector line -->
+              <line id="cs-line-atmosphere" x1="160" y1="112" x2="160" y2="55"
+                stroke="#93c5fd" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.5"/>
+              <!-- Node circle -->
+              <circle id="cs-node-atmosphere" cx="160" cy="40" r="22"
+                fill="#0d1a35" stroke="#93c5fd" stroke-width="2"/>
+              <text x="160" y="37"
+                font-family="Segoe UI,Arial,sans-serif" font-size="8"
+                fill="#93c5fd" text-anchor="middle">Atmo-</text>
+              <text x="160" y="47"
+                font-family="Segoe UI,Arial,sans-serif" font-size="8"
+                fill="#93c5fd" text-anchor="middle">sphere</text>
+
+              <!-- ── OCEAN node (bottom right) ── -->
+              <line id="cs-line-ocean" x1="183" y1="176" x2="244" y2="236"
+                stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.5"/>
+              <circle id="cs-node-ocean" cx="258" cy="248" r="22"
+                fill="#0d1a35" stroke="#38bdf8" stroke-width="2"/>
+              <text x="258" y="251"
+                font-family="Segoe UI,Arial,sans-serif" font-size="8"
+                fill="#38bdf8" text-anchor="middle">Ocean</text>
+
+              <!-- ── LAND node (bottom left) ── -->
+              <line id="cs-line-land" x1="137" y1="176" x2="76" y2="236"
+                stroke="#34d399" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.5"/>
+              <circle id="cs-node-land" cx="62" cy="248" r="22"
+                fill="#0d1a35" stroke="#34d399" stroke-width="2"/>
+              <text x="62" y="251"
+                font-family="Segoe UI,Arial,sans-serif" font-size="8"
+                fill="#34d399" text-anchor="middle">Land</text>
+
+              <!-- ── ICE node (top right) ── -->
+              <line id="cs-line-ice" x1="192" y1="130" x2="248" y2="80"
+                stroke="#e0f2fe" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.5"/>
+              <circle id="cs-node-ice" cx="262" cy="66" r="22"
+                fill="#0d1a35" stroke="#e0f2fe" stroke-width="2"/>
+              <text x="262" y="69"
+                font-family="Segoe UI,Arial,sans-serif" font-size="8"
+                fill="#e0f2fe" text-anchor="middle">Ice</text>
+
+              <!-- ── BIOSPHERE node (top left) ── -->
+              <line id="cs-line-biosphere" x1="128" y1="130" x2="72" y2="80"
+                stroke="#86efac" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.5"/>
+              <circle id="cs-node-biosphere" cx="58" cy="66" r="22"
+                fill="#0d1a35" stroke="#86efac" stroke-width="2"/>
+              <text x="58" y="63"
+                font-family="Segoe UI,Arial,sans-serif" font-size="8"
+                fill="#86efac" text-anchor="middle">Bio-</text>
+              <text x="58" y="73"
+                font-family="Segoe UI,Arial,sans-serif" font-size="8"
+                fill="#86efac" text-anchor="middle">sphere</text>
+
+            </svg>
+          </div><!-- /.cs-diagram-wrap -->
+
+          <!-- Right: information panel -->
+          <div>
+            <div
+              id="cs-info-panel"
+              class="cs-info-panel"
+              role="region"
+              aria-live="polite"
+              aria-atomic="true"
+              aria-label="Climate system component information">
+
+              <div class="cs-info-panel__label" id="cs-panel-label">
+                Select a component to explore.
+              </div>
+              <p class="cs-info-panel__text" id="cs-panel-text">
+                Click one of the five buttons to learn about that part of
+                Earth&rsquo;s climate system.
+              </p>
+
+            </div><!-- /.cs-info-panel -->
+          </div>
+
+        </div><!-- /.cs-layout -->
+
+        <!-- Callout box -->
+        <div class="callout callout--info" data-anim>
+          <span class="callout__icon" aria-hidden="true">&#128257;</span>
+          <div class="callout__content">
+            <div class="callout__title">Key idea</div>
+            <p class="callout__text">
+              Because these components interact, a change in one part of the system can
+              influence many other parts.
+            </p>
+          </div>
+        </div>
+
+        <!-- Tags and source -->
+        <div class="slide-tags" data-anim>
+          <span class="badge badge--cyan">Physics System</span>
+        </div>
+
+        <p class="slide-source" data-anim>
+          Source: NASA Science, climate system observations and Earth system components.
+        </p>
+
+      </div><!-- /.slide__inner -->
+
+    </section>
+
+
+    <!-- ── SLIDE 4: Energy Balance and Greenhouse Effect ───────── -->
+    <section
+      class="slide slide--content"
+      id="slide-energy-balance"
+      aria-label="Energy Balance and Greenhouse Effect"
+      data-slide="4">
+
+      <span class="slide__number" aria-hidden="true">04</span>
+
+      <div class="slide__inner">
+
+        <!-- Eyebrow -->
+        <span class="slide-eyebrow" aria-hidden="true">03 / ENERGY BALANCE</span>
+
+        <!-- Heading -->
+        <h2 class="slide-title" data-anim>
+          Earth&rsquo;s temperature depends on an energy balance.
+        </h2>
+
+        <!-- Lead paragraph -->
+        <p class="slide-intro" data-anim>
+          Sunlight supplies energy to Earth. The surface releases energy as infrared
+          radiation. Greenhouse gases absorb some of this infrared radiation and
+          re-emit energy, including back toward the surface.
+        </p>
+
+        <!-- Toggle button -->
+        <div class="gh-toggle-wrap" data-anim>
+          <button
+            id="gh-toggle-btn"
+            class="gh-toggle-btn"
+            type="button"
+            aria-pressed="false"
+            aria-controls="gh-diagram"
+            aria-describedby="gh-toggle-desc">
+            Show increased greenhouse-gas absorption
+          </button>
+          <span id="gh-toggle-desc" class="gh-toggle-status">
+            Currently showing: natural greenhouse effect
+          </span>
+        </div>
+
+        <!-- Greenhouse-effect SVG diagram -->
+        <div class="gh-diagram-wrap" id="gh-diagram-wrap" data-anim>
+
+          <!--
+            Inline SVG: Sun (left), atmosphere layer, Earth (bottom centre).
+            Amber arrows = incoming sunlight.
+            Warm/red-orange arrows = outgoing infrared.
+            Some outgoing arrows curve back = absorption + re-emission.
+            All sizes and positions are conceptual, not to scale.
+            viewBox 0 0 600 320.
+          -->
+          <svg
+            id="gh-diagram"
+            viewBox="0 0 600 320"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-labelledby="gh-svg-title gh-svg-desc"
+            focusable="false">
+
+            <title id="gh-svg-title">Conceptual greenhouse-effect diagram</title>
+            <desc id="gh-svg-desc">
+              A conceptual diagram showing the Sun on the left emitting incoming solar
+              radiation (amber arrows) toward Earth at the bottom. Earth emits outgoing
+              infrared radiation (red-orange arrows) upward. Some infrared is absorbed
+              by the atmosphere and re-emitted back toward Earth. When the toggle is
+              activated, additional absorption arrows appear to show increased greenhouse-gas
+              effect. The diagram is not to scale and contains no measured data.
+            </desc>
+
+            <!-- Space background -->
+            <rect width="600" height="320" fill="#080f1f" rx="8"/>
+
+            <!-- Stars (decorative dots) -->
+            <circle cx="30"  cy="20"  r="1" fill="#a8b8d0" opacity="0.6"/>
+            <circle cx="90"  cy="45"  r="1" fill="#a8b8d0" opacity="0.4"/>
+            <circle cx="200" cy="15"  r="1" fill="#a8b8d0" opacity="0.5"/>
+            <circle cx="350" cy="30"  r="1" fill="#a8b8d0" opacity="0.6"/>
+            <circle cx="480" cy="10"  r="1" fill="#a8b8d0" opacity="0.4"/>
+            <circle cx="560" cy="40"  r="1" fill="#a8b8d0" opacity="0.5"/>
+            <circle cx="510" cy="80"  r="1" fill="#a8b8d0" opacity="0.3"/>
+            <circle cx="420" cy="55"  r="1" fill="#a8b8d0" opacity="0.5"/>
+            <circle cx="140" cy="60"  r="1" fill="#a8b8d0" opacity="0.4"/>
+
+            <!-- Atmosphere band (transparent rectangle) -->
+            <rect x="0" y="90" width="600" height="80"
+              fill="#0c4a6e" opacity="0.25" rx="0"/>
+            <text x="300" y="108"
+              font-family="Segoe UI,Arial,sans-serif" font-size="11"
+              fill="#7dd3fc" text-anchor="middle" letter-spacing="2"
+              opacity="0.9">A T M O S P H E R E</text>
+
+            <!-- Sun (left side) -->
+            <circle cx="62" cy="52" r="30" fill="#f5a623" opacity="0.95"/>
+            <!-- Sun rays -->
+            <line x1="62" y1="14" x2="62" y2="6"  stroke="#f5a623" stroke-width="3" stroke-linecap="round"/>
+            <line x1="62" y1="90" x2="62" y2="98" stroke="#f5a623" stroke-width="3" stroke-linecap="round"/>
+            <line x1="24" y1="52" x2="16" y2="52" stroke="#f5a623" stroke-width="3" stroke-linecap="round"/>
+            <line x1="100" y1="52" x2="108" y2="52" stroke="#f5a623" stroke-width="3" stroke-linecap="round"/>
+            <line x1="35" y1="25" x2="29" y2="19" stroke="#f5a623" stroke-width="2" stroke-linecap="round"/>
+            <line x1="89" y1="79" x2="95" y2="85" stroke="#f5a623" stroke-width="2" stroke-linecap="round"/>
+            <line x1="89" y1="25" x2="95" y2="19" stroke="#f5a623" stroke-width="2" stroke-linecap="round"/>
+            <line x1="35" y1="79" x2="29" y2="85" stroke="#f5a623" stroke-width="2" stroke-linecap="round"/>
+            <text x="62" y="56"
+              font-family="Segoe UI,Arial,sans-serif" font-size="9"
+              fill="#080f1f" text-anchor="middle" font-weight="bold">SUN</text>
+
+            <!-- Earth (bottom centre) -->
+            <circle cx="300" cy="288" r="36" fill="#0d1a35" stroke="#1e3560" stroke-width="2"/>
+            <ellipse cx="295" cy="282" rx="14" ry="10" fill="#132144" opacity="0.9"/>
+            <ellipse cx="312" cy="292" rx="10" ry="7"  fill="#132144" opacity="0.9"/>
+            <text x="300" y="291"
+              font-family="Segoe UI,Arial,sans-serif" font-size="10"
+              fill="#a8b8d0" text-anchor="middle">Earth</text>
+
+            <!-- ── INCOMING SOLAR ARROWS (amber) ── -->
+            <!-- Arrow 1: Sun → Earth, main -->
+            <line x1="105" y1="80" x2="250" y2="260"
+              stroke="#f5a623" stroke-width="2.5" stroke-linecap="round"/>
+            <polygon points="250,260 240,245 258,248"
+              fill="#f5a623"/>
+            <!-- Arrow 2: slightly offset -->
+            <line x1="110" y1="68" x2="270" y2="250"
+              stroke="#f5a623" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+            <polygon points="270,250 261,235 278,240"
+              fill="#f5a623" opacity="0.6"/>
+            <!-- Arrow label -->
+            <text x="148" y="195"
+              font-family="Segoe UI,Arial,sans-serif" font-size="10"
+              fill="#f5a623" transform="rotate(52 148 195)">Incoming sunlight</text>
+
+            <!-- ── OUTGOING INFRARED ARROWS (red-orange, natural) ── -->
+            <!-- Arrow 1: upward from Earth, escapes to space -->
+            <line x1="320" y1="252" x2="380" y2="100"
+              stroke="#f97316" stroke-width="2.5" stroke-linecap="round"
+              class="gh-arrow"/>
+            <polygon class="gh-arrow"
+              points="380,100 370,116 384,112" fill="#f97316"/>
+            <!-- Arrow label -->
+            <text x="386" y="130"
+              font-family="Segoe UI,Arial,sans-serif" font-size="10"
+              fill="#f97316" class="gh-arrow">Outgoing infrared</text>
+
+            <!-- Arrow 2: absorbed by atmosphere, re-emitted back toward Earth (natural) -->
+            <!-- Curved path upward then curving back down -->
+            <path d="M 335,250 Q 430,130 390,170 Q 370,195 345,240"
+              fill="none" stroke="#f97316" stroke-width="2"
+              stroke-linecap="round" stroke-dasharray="6 3"
+              class="gh-arrow"/>
+            <polygon class="gh-arrow"
+              points="345,240 332,232 345,228" fill="#f97316"/>
+            <text x="410" y="150"
+              font-family="Segoe UI,Arial,sans-serif" font-size="9"
+              fill="#f97316" class="gh-arrow" opacity="0.85">Re-emitted</text>
+            <text x="410" y="162"
+              font-family="Segoe UI,Arial,sans-serif" font-size="9"
+              fill="#f97316" class="gh-arrow" opacity="0.85">toward Earth</text>
+
+            <!-- ── ENHANCED absorption arrows (hidden by default, shown on toggle) ── -->
+            <!-- Extra absorbed arrow 1 -->
+            <path d="M 350,245 Q 480,120 450,170 Q 430,200 358,240"
+              fill="none" stroke="#f97316" stroke-width="2.5"
+              stroke-linecap="round" stroke-dasharray="6 3"
+              class="gh-arrow-enhanced"/>
+            <polygon class="gh-arrow-enhanced"
+              points="358,240 345,230 358,226" fill="#f97316"/>
+            <!-- Extra absorbed arrow 2 -->
+            <path d="M 365,245 Q 510,110 500,165 Q 480,205 370,242"
+              fill="none" stroke="#f97316" stroke-width="2"
+              stroke-linecap="round" stroke-dasharray="5 3"
+              class="gh-arrow-enhanced" opacity="0.75"/>
+            <polygon class="gh-arrow-enhanced"
+              points="370,242 356,232 370,228" fill="#f97316" opacity="0.75"/>
+            <!-- Enhanced state label -->
+            <text x="490" y="192"
+              font-family="Segoe UI,Arial,sans-serif" font-size="9"
+              fill="#fdba74" class="gh-arrow-enhanced"
+              text-anchor="middle">Increased</text>
+            <text x="490" y="204"
+              font-family="Segoe UI,Arial,sans-serif" font-size="9"
+              fill="#fdba74" class="gh-arrow-enhanced"
+              text-anchor="middle">absorption</text>
+
+          </svg>
+
+          <p class="gh-disclaimer">
+            Conceptual illustration &mdash; not to scale. No measured values shown.
+          </p>
+        </div><!-- /.gh-diagram-wrap -->
+
+        <!-- Two information cards -->
+        <div class="gh-cards" data-anim>
+
+          <div class="card card--amber">
+            <div class="card__title">Incoming energy</div>
+            <p class="card__body">
+              Solar radiation enters the Earth system. Some is reflected by clouds,
+              ice, and bright surfaces, while the rest is absorbed.
+            </p>
+          </div>
+
+          <div class="card card--cyan">
+            <div class="card__title">Outgoing energy</div>
+            <p class="card__body">
+              Earth emits infrared radiation. Greenhouse gases absorb and re-emit some
+              of this energy, influencing how easily heat escapes to space.
+            </p>
+          </div>
+
+        </div><!-- /.gh-cards -->
+
+        <!-- Callout box -->
+        <div class="callout callout--warning" data-anim>
+          <span class="callout__icon" aria-hidden="true">&#9728;&#65039;</span>
+          <div class="callout__content">
+            <div class="callout__title">Key idea</div>
+            <p class="callout__text">
+              The greenhouse effect is a natural physical process. Increasing the
+              concentration of greenhouse gases changes the energy balance.
+            </p>
+          </div>
+        </div>
+
+        <!-- Tags and source -->
+        <div class="slide-tags" data-anim>
+          <span class="badge badge--amber">Physics</span>
+          <span class="badge badge--cyan">Interactive</span>
+        </div>
+
+        <p class="slide-source" data-anim>
+          Source: NobelPrize.org, The Nobel Prize in Physics 2021 &mdash; Popular science.
+        </p>
+
+      </div><!-- /.slide__inner -->
+
+    </section>
+
+
+    <!-- ── SLIDE 5: Natural vs Human Causes ────────────────────── -->
+    <section
+      class="slide slide--content"
+      id="slide-natural-vs-human"
+      aria-label="Natural vs Human Causes of Climate Change"
+      data-slide="5">
+
+      <span class="slide__number" aria-hidden="true">05</span>
+
+      <div class="slide__inner">
+
+        <span class="slide-eyebrow" aria-hidden="true">04 / CLIMATE DRIVERS</span>
+
+        <h2 class="slide-title" data-anim>
+          Climate can change naturally &mdash; and human activity can change it rapidly.
+        </h2>
+
+        <p class="slide-intro" data-anim>
+          Earth&rsquo;s climate has changed naturally throughout its history. Today,
+          scientists compare natural influences with human-caused influences using
+          physical understanding, observations, and climate-model experiments.
+        </p>
+
+        <!-- Two-column: Natural vs Human -->
+        <div class="causes-columns" data-anim>
+
+          <!-- Left: Natural -->
+          <div class="causes-card causes-card--natural">
+            <div class="causes-card__label">Natural Influences</div>
+            <h3 class="causes-card__heading">Processes that operate without human activity</h3>
+            <ul class="causes-card__list">
+              <li>Changes in solar energy</li>
+              <li>Volcanic eruptions</li>
+              <li>Orbital changes</li>
+              <li>Internal ocean&ndash;atmosphere variability</li>
+            </ul>
+            <p class="causes-card__note">
+              Natural factors can affect climate, but their timing and physical
+              fingerprints must be compared with observations.
+            </p>
+          </div>
+
+          <!-- Right: Human -->
+          <div class="causes-card causes-card--human">
+            <div class="causes-card__label">Human Influences</div>
+            <h3 class="causes-card__heading">Changes caused by human activity</h3>
+            <ul class="causes-card__list">
+              <li>Burning coal, oil, and gas</li>
+              <li>Land-use and land-cover change</li>
+              <li>Industrial greenhouse-gas emissions</li>
+              <li>Changes in atmospheric composition</li>
+            </ul>
+            <p class="causes-card__note">
+              Human activities have increased the concentration of greenhouse gases
+              in the atmosphere, changing Earth&rsquo;s energy balance.
+            </p>
+          </div>
+
+        </div><!-- /.causes-columns -->
+
+        <!-- Forcing balance visual (inline SVG) -->
+        <div class="forcing-balance-visual" data-anim aria-hidden="true">
+          <!--
+            Conceptual node map. No numerical values. No implied magnitudes.
+            viewBox 0 0 640 220.
+            Left side = natural drivers (muted cyan/blue).
+            Right side = human drivers (amber / red-orange accent).
+            Centre = Earth.
+          -->
+          <svg
+            viewBox="0 0 640 220"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="Conceptual map of natural and human climate drivers connected to Earth"
+            focusable="false">
+
+            <title>Conceptual climate-driver map</title>
+            <desc>
+              A conceptual diagram showing natural climate drivers (Sun, Volcano,
+              Orbit, Ocean) on the left side connected to a central Earth icon,
+              and human drivers (Fossil fuels, Industry, Land use, Greenhouse
+              gases) on the right side connected to the same Earth. The diagram
+              is illustrative only and does not imply equal strength of drivers.
+            </desc>
+
+            <!-- Background -->
+            <rect width="640" height="220" fill="#080f1f" rx="8"/>
+
+            <!-- ── EARTH (centre) ── -->
+            <circle cx="320" cy="110" r="30" fill="#0d1a35" stroke="#1e3560" stroke-width="2"/>
+            <ellipse cx="314" cy="105" rx="11" ry="8" fill="#132144" opacity="0.9"/>
+            <ellipse cx="328" cy="116" rx="8"  ry="6" fill="#132144" opacity="0.9"/>
+            <text x="320" y="114"
+              font-family="Segoe UI,Arial,sans-serif" font-size="9"
+              fill="#a8b8d0" text-anchor="middle" font-weight="bold">Earth</text>
+
+            <!-- ── NATURAL DRIVER NODES (left side, muted cyan/blue) ── -->
+            <!-- Curved connector lines to Earth -->
+            <path d="M 100,45  Q 200,70  290,100"  fill="none" stroke="#38bdf8" stroke-width="1.2" stroke-dasharray="5 3" opacity="0.5"/>
+            <path d="M 68,105  Q 170,110 290,110"  fill="none" stroke="#38bdf8" stroke-width="1.2" stroke-dasharray="5 3" opacity="0.5"/>
+            <path d="M 100,170 Q 200,155 290,120"  fill="none" stroke="#38bdf8" stroke-width="1.2" stroke-dasharray="5 3" opacity="0.5"/>
+            <path d="M 118,130 Q 210,130 290,115"  fill="none" stroke="#38bdf8" stroke-width="1.2" stroke-dasharray="5 3" opacity="0.4"/>
+
+            <!-- Sun node -->
+            <circle cx="92" cy="38" r="20" fill="#0d1a35" stroke="#7dd3fc" stroke-width="1.5"/>
+            <circle cx="92" cy="38" r="9"  fill="#f5a623" opacity="0.6"/>
+            <text x="92" y="66" font-family="Segoe UI,Arial,sans-serif" font-size="9" fill="#7dd3fc" text-anchor="middle">Sun</text>
+
+            <!-- Volcano node -->
+            <circle cx="58" cy="108" r="20" fill="#0d1a35" stroke="#7dd3fc" stroke-width="1.5"/>
+            <!-- tiny volcano triangle -->
+            <polygon points="58,96 50,118 66,118" fill="#7dd3fc" opacity="0.5"/>
+            <text x="58" y="136" font-family="Segoe UI,Arial,sans-serif" font-size="8" fill="#7dd3fc" text-anchor="middle">Volcano</text>
+
+            <!-- Orbit node -->
+            <circle cx="92" cy="178" r="20" fill="#0d1a35" stroke="#7dd3fc" stroke-width="1.5"/>
+            <!-- tiny ellipse for orbit -->
+            <ellipse cx="92" cy="178" rx="12" ry="6" fill="none" stroke="#7dd3fc" stroke-width="1.2" opacity="0.7"/>
+            <circle cx="104" cy="178" r="3" fill="#7dd3fc" opacity="0.7"/>
+            <text x="92" y="206" font-family="Segoe UI,Arial,sans-serif" font-size="9" fill="#7dd3fc" text-anchor="middle">Orbit</text>
+
+            <!-- Ocean node -->
+            <circle cx="118" cy="136" r="20" fill="#0d1a35" stroke="#38bdf8" stroke-width="1.5"/>
+            <!-- wavy line for ocean -->
+            <path d="M 108,136 Q 113,130 118,136 Q 123,142 128,136"
+              fill="none" stroke="#38bdf8" stroke-width="1.5" opacity="0.8"/>
+            <text x="118" y="164" font-family="Segoe UI,Arial,sans-serif" font-size="9" fill="#38bdf8" text-anchor="middle">Ocean</text>
+
+            <!-- Left label -->
+            <text x="78" y="16" font-family="Consolas,monospace" font-size="9" fill="#7dd3fc" text-anchor="middle" letter-spacing="1" opacity="0.8">NATURAL</text>
+
+            <!-- ── HUMAN DRIVER NODES (right side, amber / red-orange) ── -->
+            <!-- Curved connector lines to Earth -->
+            <path d="M 540,45  Q 440,70  350,100"  fill="none" stroke="#f5a623" stroke-width="1.2" stroke-dasharray="5 3" opacity="0.5"/>
+            <path d="M 572,105 Q 470,110 350,110"  fill="none" stroke="#f97316" stroke-width="1.2" stroke-dasharray="5 3" opacity="0.5"/>
+            <path d="M 540,170 Q 440,155 350,120"  fill="none" stroke="#f5a623" stroke-width="1.2" stroke-dasharray="5 3" opacity="0.5"/>
+            <path d="M 522,135 Q 430,130 350,115"  fill="none" stroke="#f97316" stroke-width="1.2" stroke-dasharray="5 3" opacity="0.4"/>
+
+            <!-- Fossil fuels node -->
+            <circle cx="548" cy="38" r="20" fill="#0d1a35" stroke="#f5a623" stroke-width="1.5"/>
+            <!-- flame shape -->
+            <path d="M 548,30 Q 553,34 551,42 Q 548,36 548,42 Q 545,36 545,42 Q 543,34 548,30"
+              fill="#f5a623" opacity="0.6"/>
+            <text x="548" y="66" font-family="Segoe UI,Arial,sans-serif" font-size="8" fill="#f5a623" text-anchor="middle">Fossil</text>
+            <text x="548" y="76" font-family="Segoe UI,Arial,sans-serif" font-size="8" fill="#f5a623" text-anchor="middle">fuels</text>
+
+            <!-- Industry node -->
+            <circle cx="582" cy="108" r="20" fill="#0d1a35" stroke="#f97316" stroke-width="1.5"/>
+            <!-- smokestack lines -->
+            <line x1="574" y1="118" x2="574" y2="102" stroke="#f97316" stroke-width="2" opacity="0.7"/>
+            <line x1="582" y1="116" x2="582" y2="100" stroke="#f97316" stroke-width="2" opacity="0.7"/>
+            <line x1="590" y1="118" x2="590" y2="104" stroke="#f97316" stroke-width="2" opacity="0.7"/>
+            <text x="582" y="136" font-family="Segoe UI,Arial,sans-serif" font-size="8" fill="#f97316" text-anchor="middle">Industry</text>
+
+            <!-- Land use node -->
+            <circle cx="548" cy="178" r="20" fill="#0d1a35" stroke="#f5a623" stroke-width="1.5"/>
+            <!-- grid pattern for land use -->
+            <line x1="538" y1="174" x2="558" y2="174" stroke="#f5a623" stroke-width="1" opacity="0.6"/>
+            <line x1="538" y1="180" x2="558" y2="180" stroke="#f5a623" stroke-width="1" opacity="0.6"/>
+            <line x1="548" y1="168" x2="548" y2="188" stroke="#f5a623" stroke-width="1" opacity="0.6"/>
+            <text x="548" y="206" font-family="Segoe UI,Arial,sans-serif" font-size="8" fill="#f5a623" text-anchor="middle">Land</text>
+            <text x="548" y="216" font-family="Segoe UI,Arial,sans-serif" font-size="8" fill="#f5a623" text-anchor="middle">use</text>
+
+            <!-- GHG node -->
+            <circle cx="522" cy="136" r="20" fill="#0d1a35" stroke="#f97316" stroke-width="1.5"/>
+            <!-- CO2 molecule hint: C with two O's -->
+            <circle cx="514" cy="136" r="4" fill="none" stroke="#f97316" stroke-width="1.2" opacity="0.8"/>
+            <circle cx="522" cy="136" r="4" fill="#f97316" opacity="0.5"/>
+            <circle cx="530" cy="136" r="4" fill="none" stroke="#f97316" stroke-width="1.2" opacity="0.8"/>
+            <text x="522" y="163" font-family="Segoe UI,Arial,sans-serif" font-size="8" fill="#f97316" text-anchor="middle">GHGs</text>
+
+            <!-- Right label -->
+            <text x="562" y="16" font-family="Consolas,monospace" font-size="9" fill="#f5a623" text-anchor="middle" letter-spacing="1" opacity="0.8">HUMAN</text>
+
+          </svg>
+
+          <p class="forcing-legend">
+            Conceptual map &mdash; drivers act through different physical processes.
+            Diagram does not imply equal strength.
+          </p>
+        </div><!-- /.forcing-balance-visual -->
+
+        <!-- Interactive comparison control -->
+        <div class="causes-compare" data-anim>
+          <button
+            id="causes-compare-btn"
+            class="causes-compare__btn"
+            type="button"
+            aria-expanded="false"
+            aria-controls="causes-compare-panel">
+            Compare the scientific question
+          </button>
+
+          <div
+            id="causes-compare-panel"
+            class="causes-compare__panel"
+            role="region"
+            aria-live="polite"
+            aria-atomic="true"
+            aria-label="Attribution science explanation">
+            <p id="causes-compare-text" class="causes-compare__text">
+              Click the button above to explore how scientists approach the
+              question of climate attribution.
+            </p>
+          </div>
+        </div><!-- /.causes-compare -->
+
+        <!-- Callout -->
+        <div class="callout callout--info" data-anim>
+          <span class="callout__icon" aria-hidden="true">&#128270;</span>
+          <div class="callout__content">
+            <div class="callout__title">Key idea</div>
+            <p class="callout__text">
+              Cause is established by multiple lines of evidence, not by a single graph.
+            </p>
+          </div>
+        </div>
+
+        <!-- Tags -->
+        <div class="slide-tags" data-anim>
+          <span class="badge badge--cyan">Observations</span>
+          <span class="badge badge--amber">Attribution</span>
+        </div>
+
+        <!-- Sources -->
+        <p class="slide-source" data-anim>
+          Source: IPCC AR6, Summary for Policymakers, Section A.
+        </p>
+        <p class="slide-source" data-anim>
+          Source: NASA Science, Evidence of Climate Change.
+        </p>
+
+      </div><!-- /.slide__inner -->
+
+    </section>
+
+
+    <!-- ── SLIDE 6: Evidence of Warming ────────────────────────── -->
+    <section
+      class="slide slide--content"
+      id="slide-evidence"
+      aria-label="Evidence of Warming"
+      data-slide="6">
+
+      <span class="slide__number" aria-hidden="true">06</span>
+
+      <div class="slide__inner">
+
+        <span class="slide-eyebrow" aria-hidden="true">05 / OBSERVED CHANGE</span>
+
+        <h2 class="slide-title" data-anim>
+          Evidence comes from many independent measurements.
+        </h2>
+
+        <p class="slide-intro" data-anim>
+          Global warming is not inferred from one measurement alone. Scientists
+          compare observations from the atmosphere, ocean, cryosphere, land, and
+          living systems.
+        </p>
+
+        <!-- ── ARIA-LIVE STATUS (screen-reader announcements) ──── -->
+        <div
+          id="evidence-tab-status"
+          class="sr-only"
+          aria-live="polite"
+          aria-atomic="true"></div>
+
+        <!-- ================================================================
+             EVIDENCE EXPLORER
+             Five ARIA-compliant tabs, each revealing a detailed panel.
+             ================================================================ -->
+        <section class="evidence-explorer" aria-labelledby="evidence-explorer-title" data-anim>
+
+          <div class="evidence-explorer__header">
+            <p class="eyebrow-label">EXPLORE THE EVIDENCE</p>
+            <h3 id="evidence-explorer-title">
+              Five connected indicators tell one scientific story.
+            </h3>
+            <p class="evidence-explorer__desc">
+              Select an indicator to see what scientists measure, why it matters,
+              and how it connects to the climate system.
+            </p>
+          </div>
+
+          <!-- Tab buttons -->
+          <div class="evidence-tabs"
+               role="tablist"
+               aria-label="Climate evidence indicators"
+               id="evidence-tablist">
+
+            <button
+              class="ev-tab ev-tab--atm"
+              role="tab"
+              id="ev-tab-atmosphere"
+              aria-selected="true"
+              aria-controls="ev-panel-atmosphere"
+              data-indicator="atmosphere"
+              type="button">
+              <span class="ev-tab__icon" aria-hidden="true">&#127743;</span>
+              Atmosphere
+            </button>
+
+            <button
+              class="ev-tab ev-tab--ocean"
+              role="tab"
+              id="ev-tab-ocean"
+              aria-selected="false"
+              aria-controls="ev-panel-ocean"
+              data-indicator="ocean"
+              tabindex="-1"
+              type="button">
+              <span class="ev-tab__icon" aria-hidden="true">&#127754;</span>
+              Ocean
+            </button>
+
+            <button
+              class="ev-tab ev-tab--ice"
+              role="tab"
+              id="ev-tab-ice"
+              aria-selected="false"
+              aria-controls="ev-panel-ice"
+              data-indicator="ice"
+              tabindex="-1"
+              type="button">
+              <span class="ev-tab__icon" aria-hidden="true">&#10052;</span>
+              Ice
+            </button>
+
+            <button
+              class="ev-tab ev-tab--sea"
+              role="tab"
+              id="ev-tab-sea-level"
+              aria-selected="false"
+              aria-controls="ev-panel-sea-level"
+              data-indicator="sea-level"
+              tabindex="-1"
+              type="button">
+              <span class="ev-tab__icon" aria-hidden="true">&#127754;</span>
+              Sea level
+            </button>
+
+            <button
+              class="ev-tab ev-tab--eco"
+              role="tab"
+              id="ev-tab-ecosystems"
+              aria-selected="false"
+              aria-controls="ev-panel-ecosystems"
+              data-indicator="ecosystems"
+              tabindex="-1"
+              type="button">
+              <span class="ev-tab__icon" aria-hidden="true">&#127807;</span>
+              Ecosystems
+            </button>
+
+          </div><!-- /.evidence-tabs -->
+
+          <!-- ── EVIDENCE PANELS ─────────────────────────────── -->
+          <div class="evidence-panels-wrap">
+
+            <!-- PANEL 1: ATMOSPHERE -->
+            <div
+              class="ev-panel ev-panel--atm"
+              id="ev-panel-atmosphere"
+              role="tabpanel"
+              aria-labelledby="ev-tab-atmosphere">
+
+              <div class="ev-panel__layout">
+
+                <div class="ev-panel__content">
+                  <div class="ev-panel__label">ATMOSPHERE</div>
+                  <h4 class="ev-panel__heading">
+                    Air composition and temperature are changing.
+                  </h4>
+                  <p class="ev-panel__explanation">
+                    Scientists measure atmospheric composition and temperature to
+                    understand how energy and greenhouse gases are changing in the
+                    climate system.
+                  </p>
+
+                  <div class="ev-panel__measures">
+                    <div class="ev-panel__measures-title">What scientists measure</div>
+                    <ul class="ev-panel__list">
+                      <li>Greenhouse-gas concentrations</li>
+                      <li>Air temperature</li>
+                      <li>Water vapour</li>
+                      <li>Atmospheric circulation</li>
+                    </ul>
+                  </div>
+
+                  <div class="ev-panel__why">
+                    <div class="ev-panel__why-title">Why it matters</div>
+                    <p class="ev-panel__why-text">
+                      The atmosphere controls how radiation and heat move through
+                      the climate system. Changes in greenhouse gases affect the
+                      balance between incoming and outgoing energy.
+                    </p>
+                  </div>
+
+                  <span class="ev-panel__status-tag">OBSERVED INDICATOR</span>
+
+                  <p class="ev-panel__source">
+                    Source: NASA Earthdata, Climate Indicators; NASA Science,
+                    Evidence of Climate Change.
+                  </p>
+                </div><!-- /.ev-panel__content -->
+
+                <!-- Mini SVG visual: atmosphere profile -->
+                <div class="ev-panel__visual" aria-hidden="true">
+                  <svg viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg"
+                       focusable="false" class="ev-mini-svg">
+                    <title>Conceptual atmosphere profile</title>
+                    <!-- Background -->
+                    <rect width="200" height="240" fill="#080f1f" rx="6"/>
+                    <!-- Surface (ground) -->
+                    <rect x="0" y="200" width="200" height="40" fill="#132144"/>
+                    <text x="100" y="222" font-family="Consolas,monospace"
+                          font-size="9" fill="#6a80a0" text-anchor="middle">Surface</text>
+                    <!-- Lower atmosphere band -->
+                    <rect x="0" y="130" width="200" height="70" fill="#0c4a6e" opacity="0.35"/>
+                    <text x="8" y="174" font-family="Consolas,monospace"
+                          font-size="8" fill="#7dd3fc">Lower atmo.</text>
+                    <!-- Upper atmosphere band -->
+                    <rect x="0" y="20" width="200" height="110" fill="#0d1a35" opacity="0.6"/>
+                    <text x="8" y="40" font-family="Consolas,monospace"
+                          font-size="8" fill="#93c5fd">Upper atmo.</text>
+                    <!-- GHG molecule hints -->
+                    <circle cx="60"  cy="155" r="4" fill="#38bdf8" opacity="0.5"/>
+                    <circle cx="80"  cy="162" r="3" fill="#38bdf8" opacity="0.4"/>
+                    <circle cx="130" cy="150" r="4" fill="#38bdf8" opacity="0.5"/>
+                    <circle cx="150" cy="165" r="3" fill="#38bdf8" opacity="0.4"/>
+                    <!-- Temperature trend arrow (upward, warm) -->
+                    <line x1="168" y1="195" x2="168" y2="50"
+                          stroke="#f97316" stroke-width="2.5" stroke-linecap="round"/>
+                    <polygon points="168,45 162,62 174,62" fill="#f97316"/>
+                    <text x="178" y="130" font-family="Consolas,monospace"
+                          font-size="8" fill="#f97316"
+                          transform="rotate(90 178 130)">Temp. trend</text>
+                  </svg>
+                  <p class="ev-mini-svg__label">Conceptual diagram &mdash; not measured data.</p>
+                </div>
+
+              </div><!-- /.ev-panel__layout -->
+            </div><!-- /#ev-panel-atmosphere -->
+
+
+            <!-- PANEL 2: OCEAN -->
+            <div
+              class="ev-panel ev-panel--ocean"
+              id="ev-panel-ocean"
+              role="tabpanel"
+              aria-labelledby="ev-tab-ocean"
+              hidden>
+
+              <div class="ev-panel__layout">
+
+                <div class="ev-panel__content">
+                  <div class="ev-panel__label">OCEAN</div>
+                  <h4 class="ev-panel__heading">
+                    The ocean stores and transports heat.
+                  </h4>
+                  <p class="ev-panel__explanation">
+                    The ocean absorbs a large share of the excess energy entering
+                    the climate system and transports heat through currents.
+                  </p>
+
+                  <div class="ev-panel__measures">
+                    <div class="ev-panel__measures-title">What scientists measure</div>
+                    <ul class="ev-panel__list">
+                      <li>Ocean temperature</li>
+                      <li>Ocean heat content</li>
+                      <li>Sea-surface temperature</li>
+                      <li>Ocean circulation</li>
+                    </ul>
+                  </div>
+
+                  <div class="ev-panel__why">
+                    <div class="ev-panel__why-title">Why it matters</div>
+                    <p class="ev-panel__why-text">
+                      Water has a high heat capacity, so the ocean can store large
+                      amounts of energy. This influences atmospheric warming,
+                      weather, and sea level.
+                    </p>
+                  </div>
+
+                  <span class="ev-panel__status-tag">OBSERVED INDICATOR</span>
+
+                  <p class="ev-panel__source">
+                    Source: NASA Science, Earth Indicators; NASA Science, Evidence
+                    of Climate Change.
+                  </p>
+                </div>
+
+                <!-- Mini SVG: ocean section with heat transport -->
+                <div class="ev-panel__visual" aria-hidden="true">
+                  <svg viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg"
+                       focusable="false" class="ev-mini-svg">
+                    <title>Conceptual ocean section</title>
+                    <rect width="200" height="240" fill="#080f1f" rx="6"/>
+                    <!-- Surface layer -->
+                    <rect x="0" y="40"  width="200" height="50" fill="#0c4a6e" opacity="0.6"/>
+                    <text x="8" y="58" font-family="Consolas,monospace"
+                          font-size="8" fill="#38bdf8">Surface</text>
+                    <!-- Upper ocean -->
+                    <rect x="0" y="90"  width="200" height="70" fill="#0c4a6e" opacity="0.4"/>
+                    <text x="8" y="112" font-family="Consolas,monospace"
+                          font-size="8" fill="#38bdf8">Upper ocean</text>
+                    <!-- Deep ocean -->
+                    <rect x="0" y="160" width="200" height="70" fill="#0d1a35"/>
+                    <text x="8" y="200" font-family="Consolas,monospace"
+                          font-size="8" fill="#6a80a0">Deep ocean</text>
+                    <!-- Heat arrows (curved) -->
+                    <path d="M 40,55 Q 90,80 140,55" fill="none"
+                          stroke="#f5a623" stroke-width="2" stroke-linecap="round"/>
+                    <polygon points="140,55 128,50 130,62" fill="#f5a623"/>
+                    <path d="M 150,105 Q 100,130 50,105" fill="none"
+                          stroke="#f5a623" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+                    <polygon points="50,105 62,100 60,112" fill="#f5a623" opacity="0.7"/>
+                    <text x="100" y="30" font-family="Consolas,monospace"
+                          font-size="8" fill="#f5a623" text-anchor="middle">Heat transport</text>
+                  </svg>
+                  <p class="ev-mini-svg__label">Conceptual diagram &mdash; not measured data.</p>
+                </div>
+
+              </div>
+            </div><!-- /#ev-panel-ocean -->
+
+
+            <!-- PANEL 3: ICE -->
+            <div
+              class="ev-panel ev-panel--ice"
+              id="ev-panel-ice"
+              role="tabpanel"
+              aria-labelledby="ev-tab-ice"
+              hidden>
+
+              <div class="ev-panel__layout">
+
+                <div class="ev-panel__content">
+                  <div class="ev-panel__label">ICE</div>
+                  <h4 class="ev-panel__heading">
+                    Ice and snow respond to a warming climate.
+                  </h4>
+                  <p class="ev-panel__explanation">
+                    Scientists monitor glaciers, ice sheets, snow cover, and sea ice
+                    using ground observations, aircraft, satellites, and other methods.
+                  </p>
+
+                  <div class="ev-panel__measures">
+                    <div class="ev-panel__measures-title">What scientists measure</div>
+                    <ul class="ev-panel__list">
+                      <li>Glacier mass</li>
+                      <li>Ice-sheet mass</li>
+                      <li>Snow cover</li>
+                      <li>Sea-ice extent and thickness</li>
+                    </ul>
+                  </div>
+
+                  <div class="ev-panel__why">
+                    <div class="ev-panel__why-title">Why it matters</div>
+                    <p class="ev-panel__why-text">
+                      Bright ice and snow reflect sunlight. When ice is lost,
+                      darker land or ocean can absorb more solar energy.
+                    </p>
+                  </div>
+
+                  <span class="ev-panel__status-tag">OBSERVED INDICATOR</span>
+
+                  <p class="ev-panel__source">
+                    Source: NASA Science, Evidence of Climate Change; NASA Earthdata,
+                    Climate Indicators.
+                  </p>
+                </div>
+
+                <!-- Mini SVG: ice surface with reflection/absorption arrows -->
+                <div class="ev-panel__visual" aria-hidden="true">
+                  <svg viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg"
+                       focusable="false" class="ev-mini-svg">
+                    <title>Conceptual ice reflection diagram</title>
+                    <rect width="200" height="240" fill="#080f1f" rx="6"/>
+                    <!-- Ocean (bottom) -->
+                    <rect x="0" y="160" width="200" height="80" fill="#0c4a6e" opacity="0.5"/>
+                    <text x="100" y="210" font-family="Consolas,monospace"
+                          font-size="8" fill="#38bdf8" text-anchor="middle">Ocean</text>
+                    <!-- Ice surface -->
+                    <rect x="10" y="130" width="100" height="30"
+                          fill="#e0f2fe" opacity="0.8" rx="2"/>
+                    <text x="60" y="148" font-family="Consolas,monospace"
+                          font-size="7" fill="#080f1f" text-anchor="middle" font-weight="bold">Ice</text>
+                    <!-- Sunlight arrow down -->
+                    <line x1="60" y1="20" x2="60" y2="125"
+                          stroke="#f5a623" stroke-width="2" stroke-linecap="round"/>
+                    <polygon points="60,125 54,108 66,108" fill="#f5a623"/>
+                    <!-- Reflection arrow (off ice) -->
+                    <line x1="65" y1="125" x2="100" y2="20"
+                          stroke="#e0f2fe" stroke-width="2"
+                          stroke-dasharray="4 2" stroke-linecap="round"/>
+                    <polygon points="100,20 90,36 102,38" fill="#e0f2fe"/>
+                    <text x="118" y="68" font-family="Consolas,monospace"
+                          font-size="7" fill="#e0f2fe" transform="rotate(-65 118 68)">reflection</text>
+                    <!-- Absorption arrow (into ocean, no ice) -->
+                    <line x1="155" y1="20" x2="155" y2="155"
+                          stroke="#f97316" stroke-width="2" stroke-linecap="round"/>
+                    <polygon points="155,155 149,138 161,138" fill="#f97316"/>
+                    <text x="170" y="100" font-family="Consolas,monospace"
+                          font-size="7" fill="#f97316"
+                          transform="rotate(90 170 100)">absorption</text>
+                    <text x="145" y="175" font-family="Consolas,monospace"
+                          font-size="6" fill="#f97316" text-anchor="middle">after ice loss</text>
+                  </svg>
+                  <p class="ev-mini-svg__label">Conceptual diagram &mdash; not measured data.</p>
+                </div>
+
+              </div>
+            </div><!-- /#ev-panel-ice -->
+
+
+            <!-- PANEL 4: SEA LEVEL -->
+            <div
+              class="ev-panel ev-panel--sea"
+              id="ev-panel-sea-level"
+              role="tabpanel"
+              aria-labelledby="ev-tab-sea-level"
+              hidden>
+
+              <div class="ev-panel__layout">
+
+                <div class="ev-panel__content">
+                  <div class="ev-panel__label">SEA LEVEL</div>
+                  <h4 class="ev-panel__heading">
+                    Sea level responds to warming in more than one way.
+                  </h4>
+                  <p class="ev-panel__explanation">
+                    Global mean sea level is influenced by the expansion of warming
+                    seawater and by water added from melting land ice.
+                  </p>
+
+                  <div class="ev-panel__measures">
+                    <div class="ev-panel__measures-title">What scientists measure</div>
+                    <ul class="ev-panel__list">
+                      <li>Satellite altimetry</li>
+                      <li>Tide-gauge records</li>
+                      <li>Ocean temperature</li>
+                      <li>Glacier and ice-sheet mass</li>
+                    </ul>
+                  </div>
+
+                  <div class="ev-panel__why">
+                    <div class="ev-panel__why-title">Why it matters</div>
+                    <p class="ev-panel__why-text">
+                      Sea-level observations combine information from the ocean,
+                      atmosphere, glaciers, and ice sheets.
+                    </p>
+                  </div>
+
+                  <span class="ev-panel__status-tag">OBSERVED INDICATOR</span>
+
+                  <p class="ev-panel__source">
+                    Source: NASA Earth Indicators; IPCC AR6 Summary for
+                    Policymakers.
+                  </p>
+                </div>
+
+                <!-- Mini SVG: coastline with sea-level arrows -->
+                <div class="ev-panel__visual" aria-hidden="true">
+                  <svg viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg"
+                       focusable="false" class="ev-mini-svg">
+                    <title>Conceptual sea-level diagram</title>
+                    <rect width="200" height="240" fill="#080f1f" rx="6"/>
+                    <!-- Ocean fill -->
+                    <rect x="0" y="130" width="200" height="110" fill="#0c4a6e" opacity="0.5"/>
+                    <!-- Coastline / land -->
+                    <polygon points="0,180 0,100 60,100 80,130 100,110 110,130 200,130 200,180"
+                             fill="#132144"/>
+                    <!-- Sea level line (current) -->
+                    <line x1="0" y1="130" x2="200" y2="130"
+                          stroke="#38bdf8" stroke-width="2" stroke-dasharray="6 3"/>
+                    <text x="8" y="124" font-family="Consolas,monospace"
+                          font-size="7" fill="#38bdf8">sea level</text>
+                    <!-- Expansion arrow -->
+                    <line x1="130" y1="175" x2="130" y2="122"
+                          stroke="#f5a623" stroke-width="2" stroke-linecap="round"/>
+                    <polygon points="130,118 124,135 136,135" fill="#f5a623"/>
+                    <text x="140" y="162" font-family="Consolas,monospace"
+                          font-size="6.5" fill="#f5a623">warming water</text>
+                    <text x="140" y="172" font-family="Consolas,monospace"
+                          font-size="6.5" fill="#f5a623">expands</text>
+                    <!-- Melt water arrow -->
+                    <line x1="165" y1="210" x2="165" y2="135"
+                          stroke="#f97316" stroke-width="2" stroke-linecap="round"/>
+                    <polygon points="165,131 159,148 171,148" fill="#f97316"/>
+                    <!-- Ice block at top -->
+                    <rect x="155" y="30" width="30" height="18"
+                          fill="#e0f2fe" opacity="0.7" rx="2"/>
+                    <line x1="165" y1="48" x2="165" y2="210"
+                          stroke="#e0f2fe" stroke-width="1" stroke-dasharray="3 2" opacity="0.5"/>
+                    <text x="156" y="20" font-family="Consolas,monospace"
+                          font-size="6" fill="#e0f2fe">land ice</text>
+                    <text x="140" y="225" font-family="Consolas,monospace"
+                          font-size="6" fill="#f97316">melting adds</text>
+                    <text x="140" y="235" font-family="Consolas,monospace"
+                          font-size="6" fill="#f97316">water</text>
+                  </svg>
+                  <p class="ev-mini-svg__label">Conceptual diagram &mdash; not measured data.</p>
+                </div>
+
+              </div>
+            </div><!-- /#ev-panel-sea-level -->
+
+
+            <!-- PANEL 5: ECOSYSTEMS -->
+            <div
+              class="ev-panel ev-panel--eco"
+              id="ev-panel-ecosystems"
+              role="tabpanel"
+              aria-labelledby="ev-tab-ecosystems"
+              hidden>
+
+              <div class="ev-panel__layout">
+
+                <div class="ev-panel__content">
+                  <div class="ev-panel__label">ECOSYSTEMS</div>
+                  <h4 class="ev-panel__heading">
+                    Living systems respond to climate conditions.
+                  </h4>
+                  <p class="ev-panel__explanation">
+                    Plants, animals, and microorganisms interact with temperature,
+                    water, carbon, and seasonal cycles.
+                  </p>
+
+                  <div class="ev-panel__measures">
+                    <div class="ev-panel__measures-title">What scientists measure</div>
+                    <ul class="ev-panel__list">
+                      <li>Vegetation activity</li>
+                      <li>Carbon exchange</li>
+                      <li>Growing-season timing</li>
+                      <li>Species and ecosystem responses</li>
+                    </ul>
+                  </div>
+
+                  <div class="ev-panel__why">
+                    <div class="ev-panel__why-title">Why it matters</div>
+                    <p class="ev-panel__why-text">
+                      Ecosystems exchange carbon and water with the atmosphere and
+                      can respond to changes in temperature, precipitation, and
+                      seasonal timing.
+                    </p>
+                  </div>
+
+                  <span class="ev-panel__status-tag">OBSERVED INDICATOR</span>
+
+                  <p class="ev-panel__source">
+                    Source: NASA Earthdata, Climate Indicators.
+                  </p>
+                </div>
+
+                <!-- Mini SVG: plant, soil, exchange arrows -->
+                <div class="ev-panel__visual" aria-hidden="true">
+                  <svg viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg"
+                       focusable="false" class="ev-mini-svg">
+                    <title>Conceptual ecosystem carbon and water exchange diagram</title>
+                    <rect width="200" height="240" fill="#080f1f" rx="6"/>
+                    <!-- Soil -->
+                    <rect x="0" y="175" width="200" height="65" fill="#132144"/>
+                    <text x="100" y="210" font-family="Consolas,monospace"
+                          font-size="8" fill="#6a80a0" text-anchor="middle">Soil</text>
+                    <!-- Plant stem -->
+                    <line x1="80" y1="175" x2="80" y2="100"
+                          stroke="#34d399" stroke-width="3" stroke-linecap="round"/>
+                    <!-- Leaves -->
+                    <ellipse cx="62" cy="118" rx="20" ry="10"
+                             fill="#34d399" opacity="0.8" transform="rotate(-20 62 118)"/>
+                    <ellipse cx="98" cy="110" rx="20" ry="10"
+                             fill="#34d399" opacity="0.8" transform="rotate(20 98 110)"/>
+                    <ellipse cx="78" cy="95" rx="16" ry="9"
+                             fill="#34d399" opacity="0.9"/>
+                    <!-- Atmosphere label -->
+                    <text x="100" y="30" font-family="Consolas,monospace"
+                          font-size="8" fill="#93c5fd" text-anchor="middle">Atmosphere</text>
+                    <!-- Carbon exchange arrows (bidirectional) -->
+                    <line x1="140" y1="165" x2="140" y2="40"
+                          stroke="#38bdf8" stroke-width="2" stroke-linecap="round"/>
+                    <polygon points="140,35 134,52 146,52" fill="#38bdf8"/>
+                    <line x1="150" y1="40" x2="150" y2="165"
+                          stroke="#38bdf8" stroke-width="2" stroke-linecap="round"
+                          stroke-dasharray="4 2"/>
+                    <polygon points="150,170 144,153 156,153" fill="#38bdf8"/>
+                    <text x="162" y="105" font-family="Consolas,monospace"
+                          font-size="7" fill="#38bdf8"
+                          transform="rotate(90 162 105)">carbon exchange</text>
+                    <!-- Water cycle arrow -->
+                    <path d="M 30,170 Q 20,120 30,60" fill="none"
+                          stroke="#7dd3fc" stroke-width="1.5" stroke-dasharray="4 2"
+                          stroke-linecap="round"/>
+                    <polygon points="30,55 24,72 36,72" fill="#7dd3fc"/>
+                    <text x="8" y="118" font-family="Consolas,monospace"
+                          font-size="7" fill="#7dd3fc"
+                          transform="rotate(-90 8 118)">water cycle</text>
+                  </svg>
+                  <p class="ev-mini-svg__label">Conceptual diagram &mdash; not measured data.</p>
+                </div>
+
+              </div>
+            </div><!-- /#ev-panel-ecosystems -->
+
+          </div><!-- /.evidence-panels-wrap -->
+
+        </section><!-- /.evidence-explorer -->
+
+
+        <!-- ================================================================
+             TEMPERATURE DATA PREVIEW
+             ================================================================ -->
+                <!-- ================================================================
+             TEMPERATURE GRAPH — NASA GISTEMP v4 (authentic data)
+             ================================================================ -->
+        <div class="data-preview-card" data-anim>
+
+          <div class="data-preview-card__header">
+            <h3 class="data-preview-card__heading">Global Surface Temperature Anomaly</h3>
+            <span class="badge badge--amber">NASA GISTEMP v4</span>
+          </div>
+
+          <p class="data-preview-card__text">
+            The graph uses NASA GISTEMP&nbsp;v4 global annual Land-Ocean Temperature Index.
+            Anomalies are in &deg;C relative to the 1951&ndash;1980 average.
+          </p>
+
+          <div class="temp-graph-wrap" id="temp-graph-section">
+            <div class="temp-graph-header">
+              <div>
+                <div class="temp-graph-title">Global Annual Surface Temperature Anomaly</div>
+                <div class="temp-graph-subtitle">NASA GISTEMP v4 &bull; Land-Ocean Temperature Index</div>
+              </div>
+              <button class="temp-graph-btn" id="temp-table-btn" type="button"
+                      aria-expanded="false" aria-controls="temp-data-table">
+                Show selected data points
+              </button>
+            </div>
+
+            <div class="temp-graph-canvas-wrap">
+              <svg id="temp-graph-svg" viewBox="0 0 760 300"
+                   xmlns="http://www.w3.org/2000/svg"
+                   role="img" aria-labelledby="tg-svg-title tg-svg-desc"
+                   focusable="true" tabindex="0" class="temp-graph-svg">
+                <title id="tg-svg-title">Global Annual Surface Temperature Anomaly, 1880-2025</title>
+                <desc id="tg-svg-desc">An SVG line chart showing NASA GISTEMP v4 annual mean surface
+                  temperature anomalies from 1880 to 2025. Anomalies are in degrees Celsius relative
+                  to the 1951-1980 baseline. A long-term upward trend is visible.</desc>
+                <text x="380" y="150" font-family="Consolas,monospace" font-size="12"
+                      fill="#6a80a0" text-anchor="middle" id="tg-loading-msg">Loading data&hellip;</text>
+              </svg>
+              <div class="temp-tooltip" id="temp-tooltip" role="tooltip" aria-live="polite" hidden>
+                <span class="temp-tooltip__year" id="tt-year"></span>
+                <span class="temp-tooltip__val"  id="tt-val"></span>
+              </div>
+            </div>
+
+            <div class="temp-graph-footnotes">
+              <span class="temp-graph-obs-label">Historical observations &mdash; not a future projection.</span>
+              <span class="temp-graph-src">Source: NASA GISS Surface Temperature Analysis (GISTEMP&nbsp;v4), anomalies relative to 1951&ndash;1980.</span>
+            </div>
+
+            <div class="temp-graph-fallback" id="temp-graph-fallback" hidden>
+              <p><strong>The local data file could not be loaded in this browser.</strong>
+                Use Kiro Preview or a local server to view the interactive graph.</p>
+              <p>Windows: <code>py -m http.server 8000</code> &nbsp;|&nbsp;
+                 macOS/Linux: <code>python3 -m http.server 8000</code> &nbsp;|&nbsp;
+                 Then open: <code>http://localhost:8000</code></p>
+            </div>
+
+            <div id="temp-data-table" hidden>
+              <table class="temp-data-table" aria-label="Selected NASA GISTEMP v4 annual temperature anomalies">
+                <thead>
+                  <tr>
+                    <th scope="col">Year</th>
+                    <th scope="col">Anomaly (&deg;C, rel. 1951&ndash;1980)</th>
+                  </tr>
+                </thead>
+                <tbody id="temp-table-body"></tbody>
+              </table>
+              <p class="temp-table-note">Selected representative years. Full dataset: 1880&ndash;2025 (146 observations).</p>
+            </div>
+
+            <p class="temp-limitation-note">An anomaly is a difference from a reference-period average. This graph does not show absolute global temperature and does not provide a forecast.</p>
+          </div><!-- /.temp-graph-wrap -->
+
+          <dl class="data-preview-card__meta">
+            <dt>Dataset</dt>   <dd>NASA GISTEMP v4</dd>
+            <dt>Variable</dt>  <dd>Global surface temperature anomaly</dd>
+            <dt>Units</dt>     <dd>Degrees Celsius</dd>
+            <dt>Baseline</dt>  <dd>1951&ndash;1980</dd>
+            <dt>Period</dt>    <dd>1880&ndash;2025 (146 annual observations)</dd>
+            <dt>Status</dt>    <dd><strong class="data-status-tag">DATA LOADED</strong></dd>
+          </dl>
+
+          <button id="anomaly-explain-btn" class="anomaly-btn" type="button"
+                  aria-expanded="false" aria-controls="anomaly-explain-panel">
+            How to read a temperature anomaly
+          </button>
+          <div id="anomaly-explain-panel" class="anomaly-panel" hidden>
+            <p class="anomaly-panel__text">A temperature anomaly is a difference from a reference-period average. It is not the absolute temperature of the planet.</p>
+          </div>
+
+          <p class="ev-panel__source" style="margin-top:var(--space-4)">Source: NASA GISS Surface Temperature Analysis, GISTEMP v4.</p>
+
+        </div><!-- /.data-preview-card --><!-- /.data-preview-card -->
+
+
+        <!-- ================================================================
+             VIDEO PLACEHOLDER (improved)
+             ================================================================ -->
+        <figure class="video-card" data-anim id="evidence-video-card">
+          <div class="video-card__tag">NASA CLIMATE SPIRAL &mdash; OBSERVED TEMPERATURE ANOMALIES</div>
+          <div class="video-frame">
+            <video controls preload="metadata" playsinline
+              aria-describedby="evidence-video-caption"
+              class="video-frame__player">
+              <source src="assets/videos/climate-spiral.mp4" type="video/mp4">
+              <div class="video-fallback">
+                <p>Video file not found. Add <code>assets/videos/climate-spiral.mp4</code> to this folder.</p>
+              </div>
+            </video>
+          </div>
+          <figcaption id="evidence-video-caption" class="video-card__caption">
+            Historical global temperature anomalies visualized from the NASA GISTEMP record.
+            This is historical evidence, not a future projection.
+            Duration: approx.&nbsp;20&nbsp;seconds.
+          </figcaption>
+          <p class="media-credit">
+            Credit: NASA&rsquo;s Scientific Visualization Studio.
+            Source: svs.gsfc.nasa.gov/5057
+          </p>
+        </figure>
+
+
+        <!-- Tags and sources -->
+        <div class="slide-tags" data-anim>
+          <span class="badge badge--cyan">Observations</span>
+          <span class="badge badge--amber">Evidence</span>
+          <span class="badge badge--cyan">Interactive</span>
+        </div>
+
+        <p class="slide-source" data-anim>
+          Source: IPCC AR6, Summary for Policymakers, Section A.1.
+        </p>
+        <p class="slide-source" data-anim>
+          Source: NASA Science, Evidence of Climate Change.
+        </p>
+        <p class="slide-source" data-anim>
+          Source: NASA Earthdata, Climate Indicators.
+        </p>
+
+        <!-- ── MEDIA SLOT: evidence video or climate spiral ── -->
+        <!-- TOPIC PENDING — climate-change.mp4 not placed until topic/source/credit confirmed -->
+        <div id="evidence-atmosphere-media" class="media-slot" data-topic="atmosphere"
+             aria-label="Media placeholder — climate evidence"
+             hidden>
+          <!-- climate-change.mp4: topic, source URL, and credit are PENDING.
+               Will be placed when confirmed. See media review panel. -->
+        </div>
+
+      </div><!-- /.slide__inner -->
+
+    </section>
+
+
+    <!-- ── SLIDE 7: Climate Models ──────────────────────────────── -->
+    <section
+      class="slide slide--content"
+      id="slide-models"
+      aria-label="Climate Models"
+      data-slide="7">
+
+      <span class="slide__number" aria-hidden="true">07</span>
+
+      <div class="slide__inner">
+
+        <span class="slide-eyebrow">06 / FROM PHYSICS TO PREDICTION</span>
+
+        <h2 class="slide-title" data-anim>
+          Climate models turn physical laws into experiments.
+        </h2>
+
+        <p class="slide-intro" data-anim>
+          A climate model is a mathematical representation of important processes
+          in the climate system. It uses equations, observations, and numerical
+          methods to explore how the atmosphere, ocean, land, ice, and biosphere
+          interact.
+        </p>
+
+        <!-- ── INTERACTIVE MODEL PIPELINE ─────────────────────── -->
+        <div class="pipeline-section" data-anim>
+
+          <!-- aria-live status -->
+          <div id="pipeline-status" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+          <div class="pipeline-tabs"
+               role="tablist"
+               aria-label="Climate model pipeline steps"
+               id="pipeline-tablist">
+
+            <button class="pipeline-tab" role="tab" type="button"
+                    id="ptab-1" aria-selected="true" tabindex="0"
+                    aria-controls="ppanel-1" data-step="1">
+              <span class="pipeline-tab__num">01</span>
+              <span class="pipeline-tab__label">Observations</span>
+            </button>
+
+            <span class="pipeline-connector" aria-hidden="true">&#8594;</span>
+
+            <button class="pipeline-tab" role="tab" type="button"
+                    id="ptab-2" aria-selected="false" tabindex="-1"
+                    aria-controls="ppanel-2" data-step="2">
+              <span class="pipeline-tab__num">02</span>
+              <span class="pipeline-tab__label">Physical Laws</span>
+            </button>
+
+            <span class="pipeline-connector" aria-hidden="true">&#8594;</span>
+
+            <button class="pipeline-tab" role="tab" type="button"
+                    id="ptab-3" aria-selected="false" tabindex="-1"
+                    aria-controls="ppanel-3" data-step="3">
+              <span class="pipeline-tab__num">03</span>
+              <span class="pipeline-tab__label">Grid</span>
+            </button>
+
+            <span class="pipeline-connector" aria-hidden="true">&#8594;</span>
+
+            <button class="pipeline-tab" role="tab" type="button"
+                    id="ptab-4" aria-selected="false" tabindex="-1"
+                    aria-controls="ppanel-4" data-step="4">
+              <span class="pipeline-tab__num">04</span>
+              <span class="pipeline-tab__label">Coupled</span>
+            </button>
+
+            <span class="pipeline-connector" aria-hidden="true">&#8594;</span>
+
+            <button class="pipeline-tab" role="tab" type="button"
+                    id="ptab-5" aria-selected="false" tabindex="-1"
+                    aria-controls="ppanel-5" data-step="5">
+              <span class="pipeline-tab__num">05</span>
+              <span class="pipeline-tab__label">Simulation</span>
+            </button>
+
+            <span class="pipeline-connector" aria-hidden="true">&#8594;</span>
+
+            <button class="pipeline-tab" role="tab" type="button"
+                    id="ptab-6" aria-selected="false" tabindex="-1"
+                    aria-controls="ppanel-6" data-step="6">
+              <span class="pipeline-tab__num">06</span>
+              <span class="pipeline-tab__label">Projection</span>
+            </button>
+
+          </div><!-- /.pipeline-tabs -->
+
+          <div class="pipeline-panels">
+
+            <div id="ppanel-1" role="tabpanel" aria-labelledby="ptab-1" class="pipeline-panel">
+              <div class="pipeline-panel__label">OBSERVATIONS</div>
+              <p class="pipeline-panel__text">Measurements describe the current and past climate system.</p>
+            </div>
+
+            <div id="ppanel-2" role="tabpanel" aria-labelledby="ptab-2" class="pipeline-panel" hidden>
+              <div class="pipeline-panel__label">PHYSICAL LAWS</div>
+              <p class="pipeline-panel__text">Equations describe motion, radiation, heat, water, and carbon.</p>
+            </div>
+
+            <div id="ppanel-3" role="tabpanel" aria-labelledby="ptab-3" class="pipeline-panel" hidden>
+              <div class="pipeline-panel__label">GRID</div>
+              <p class="pipeline-panel__text">The planet is represented as a three-dimensional set of model cells.</p>
+            </div>
+
+            <div id="ppanel-4" role="tabpanel" aria-labelledby="ptab-4" class="pipeline-panel" hidden>
+              <div class="pipeline-panel__label">COUPLED COMPONENTS</div>
+              <p class="pipeline-panel__text">Atmosphere, ocean, land, and ice exchange energy, water, and momentum.</p>
+            </div>
+
+            <div id="ppanel-5" role="tabpanel" aria-labelledby="ptab-5" class="pipeline-panel" hidden>
+              <div class="pipeline-panel__label">SIMULATION</div>
+              <p class="pipeline-panel__text">A computer calculates how the system evolves through time.</p>
+            </div>
+
+            <div id="ppanel-6" role="tabpanel" aria-labelledby="ptab-6" class="pipeline-panel" hidden>
+              <div class="pipeline-panel__label">COMPARISON AND PROJECTION</div>
+              <p class="pipeline-panel__text">Simulations are evaluated against observations and used to explore conditional future pathways.</p>
+            </div>
+
+          </div><!-- /.pipeline-panels -->
+        </div><!-- /.pipeline-section -->
+
+
+        <!-- ── WHAT DOES RELIABLE PREDICTION MEAN? ────────────── -->
+        <div class="models-reliable" data-anim>
+
+          <h3 class="models-section-heading">What does reliable prediction mean?</h3>
+
+          <p class="models-reliable__intro">
+            Reliable climate prediction does not mean predicting the exact weather
+            on a particular day decades from now. It means estimating large-scale,
+            long-term climate responses under clearly stated assumptions.
+          </p>
+
+          <div class="models-cards-row">
+
+            <div class="models-card models-card--predict">
+              <div class="models-card__label">PREDICTION</div>
+              <h4 class="models-card__heading">A statement about an expected future outcome</h4>
+              <p class="models-card__body">Prediction is often used for a future outcome that is expected under a particular set of conditions.</p>
+            </div>
+
+            <div class="models-card models-card--project">
+              <div class="models-card__label">PROJECTION</div>
+              <h4 class="models-card__heading">A conditional future pathway</h4>
+              <p class="models-card__body">A climate projection depends on assumptions about future greenhouse-gas emissions, land use, and other influences.</p>
+            </div>
+
+            <div class="models-card models-card--uncertain">
+              <div class="models-card__label">UNCERTAINTY</div>
+              <h4 class="models-card__heading">A range of possible outcomes</h4>
+              <p class="models-card__body">Uncertainty can come from natural variability, imperfect observations, model structure, and unknown future human choices.</p>
+            </div>
+
+          </div><!-- /.models-cards-row -->
+        </div><!-- /.models-reliable -->
+
+
+        <!-- ── WHY MODELS CAN BE USEFUL ───────────────────────── -->
+        <div class="models-useful-panel" data-anim aria-label="Why models can be useful">
+
+          <div class="models-useful-panel__header">
+            <span class="models-useful-panel__tag">CONCEPTUAL — NOT MEASURED DATA</span>
+            <h3 class="models-useful-panel__heading">Why models can be useful</h3>
+          </div>
+
+          <div class="models-layers">
+            <div class="models-layer models-layer--1">
+              <span class="models-layer__icon" aria-hidden="true">&#9633;</span>
+              <span class="models-layer__text">Physical understanding</span>
+            </div>
+            <div class="models-layer__arrow" aria-hidden="true">+</div>
+            <div class="models-layer models-layer--2">
+              <span class="models-layer__icon" aria-hidden="true">&#9633;</span>
+              <span class="models-layer__text">Observed constraints</span>
+            </div>
+            <div class="models-layer__arrow" aria-hidden="true">+</div>
+            <div class="models-layer models-layer--3">
+              <span class="models-layer__icon" aria-hidden="true">&#9633;</span>
+              <span class="models-layer__text">Multiple simulations</span>
+            </div>
+          </div>
+
+        </div><!-- /.models-useful-panel -->
+
+
+        <!-- Callout -->
+        <div class="callout callout--info" data-anim>
+          <span class="callout__icon" aria-hidden="true">&#128203;</span>
+          <div class="callout__content">
+            <div class="callout__title">Key idea</div>
+            <p class="callout__text">
+              Different models may produce different details, while still agreeing
+              on important large-scale physical responses.
+            </p>
+          </div>
+        </div>
+
+        <!-- Tags -->
+        <div class="slide-tags" data-anim>
+          <span class="badge badge--cyan">Model</span>
+          <span class="badge badge--amber">Projection</span>
+          <span class="badge badge--cyan">Uncertainty</span>
+        </div>
+
+        <!-- ── MEDIA SLOT: greenhouse / energy-balance media ── -->
+        <!-- APPROVED: global-energy-budget.jpg + greenhouse-effect.mp4 -->
+        <div id="greenhouse-media" class="media-slot" data-topic="greenhouse-effect">
+
+          <!-- Energy Budget Diagram -->
+          <figure class="media-presentation-card">
+            <div class="media-presentation-card__label">LOCAL MEDIA &mdash; ENERGY BUDGET</div>
+            <img
+              src="assets/images/global-energy-budget.jpg"
+              alt="Earth's energy budget diagram showing incoming solar radiation (340.4 W/m²), reflected solar radiation, outgoing infrared radiation (239.9 W/m²), greenhouse-gas back radiation (340.3 W/m²), thermals, and latent heat. All values are average fluxes in W/m² based on ten years of data. Source: Loeb et al. J. Clim. 2009 / Trenberth et al. BAMS 2009."
+              class="media-presentation-card__img"
+              loading="lazy"/>
+            <figcaption class="media-caption">
+              Earth&rsquo;s energy budget connects incoming solar energy with outgoing heat.
+            </figcaption>
+            <p class="media-credit">
+              Credit: NASA/JPL-Caltech. Source: NASA Science &mdash; The Greenhouse Effect, Simplified.
+            </p>
+          </figure>
+
+          <!-- Greenhouse Effect Video -->
+          <figure class="media-presentation-card media-presentation-card--video">
+            <div class="media-presentation-card__label">LOCAL MEDIA &mdash; GREENHOUSE EFFECT VIDEO</div>
+            <div class="video-frame">
+              <video controls preload="metadata" playsinline
+                     aria-describedby="gh-video-caption"
+                     class="video-frame__player">
+                <source src="assets/videos/greenhouse-effect.mp4" type="video/mp4">
+                <div class="video-fallback">
+                  <p>Video file not found. Add <code>assets/videos/greenhouse-effect.mp4</code>.</p>
+                </div>
+              </video>
+            </div>
+            <figcaption id="gh-video-caption" class="media-caption">
+              Short visual explanation of how greenhouse gases interact with outgoing heat.
+              Duration: approx.&nbsp;17&nbsp;seconds.
+            </figcaption>
+            <p class="media-credit">
+              Credit: NASA/JPL-Caltech. Source: NASA Science &mdash; The Greenhouse Effect, Simplified.
+            </p>
+          </figure>
+
+        </div><!-- /#greenhouse-media -->
+
+        <!-- Sources -->
+        <p class="slide-source" data-anim>Source: NOAA Climate.gov, Climate Models.</p>
+        <p class="slide-source" data-anim>Source: IPCC AR6 Working Group I, Technical Summary.</p>
+
+      </div><!-- /.slide__inner -->
+    </section>
+
+
+    <!-- ── SLIDE 8: Syukuro Manabe ──────────────────────────────── -->
+    <section
+      class="slide slide--content"
+      id="slide-manabe"
+      aria-label="Syukuro Manabe — Nobel Laureate"
+      data-slide="8">
+
+      <span class="slide__number" aria-hidden="true">08</span>
+
+      <div class="slide__inner">
+
+        <span class="slide-eyebrow">07 / THE PHYSICS OF CLIMATE</span>
+
+        <h2 class="slide-title" data-anim>
+          Syukuro Manabe made the atmosphere computable.
+        </h2>
+
+        <p class="slide-intro scientist-subtitle" data-anim>
+          He connected radiation balance, vertical heat transport, atmospheric
+          composition, and surface temperature.
+        </p>
+
+        <!-- ── TWO-COLUMN LAYOUT ────────────────────────────────── -->
+        <div class="scientist-slide-layout" data-anim>
+
+          <!-- ── LEFT: IDENTITY + TIMELINE ─────────────────────── -->
+          <div class="scientist-slide-left">
+
+            <!-- Identity card -->
+            <div class="scientist-identity-card" aria-label="Scientist identity">
+              <div class="scientist-identity-card__visual" aria-hidden="true">
+                <svg viewBox="0 0 120 140" xmlns="http://www.w3.org/2000/svg"
+                     class="scientist-avatar-mini" focusable="false">
+                  <title>Abstract profile illustration</title>
+                  <rect width="120" height="140" fill="#0d1a35" rx="8"/>
+                  <!-- Atmosphere layers -->
+                  <rect x="0" y="55" width="120" height="20" fill="#0c4a6e" opacity="0.3"/>
+                  <rect x="0" y="75" width="120" height="20" fill="#0c4a6e" opacity="0.2"/>
+                  <!-- Figure -->
+                  <circle cx="60" cy="48" r="18" fill="#132144" stroke="#38bdf8" stroke-width="1.5"/>
+                  <rect x="42" y="66" width="36" height="42" rx="8"
+                        fill="#132144" stroke="#38bdf8" stroke-width="1.5"/>
+                  <!-- Radiation lines -->
+                  <line x1="12" y1="20" x2="60" y2="48"
+                        stroke="#f5a623" stroke-width="1" stroke-dasharray="3 2" opacity="0.6"/>
+                  <line x1="108" y1="20" x2="60" y2="48"
+                        stroke="#f5a623" stroke-width="1" stroke-dasharray="3 2" opacity="0.6"/>
+                  <!-- Nobel star -->
+                  <text x="96" y="14" font-family="Segoe UI,sans-serif"
+                        font-size="12" fill="#f5a623" text-anchor="middle">&#9733;</text>
+                </svg>
+              </div>
+
+              <div class="scientist-identity-card__info">
+                <h3 class="scientist-identity-card__name">Syukuro Manabe</h3>
+                <dl class="scientist-identity-card__meta">
+                  <dt>Role</dt>
+                  <dd>Climate physicist and pioneer of physical climate modelling</dd>
+                  <dt>Prize</dt>
+                  <dd>Half of the 2021 Nobel Prize in Physics</dd>
+                </dl>
+                <div class="scientist-identity-card__citation">
+                  <div class="citation-label">Nobel citation</div>
+                  <p class="citation-text">
+                    For the physical modelling of Earth&rsquo;s climate, quantifying
+                    variability and reliably predicting global warming.
+                  </p>
+                </div>
+                <p class="scientist-identity-card__profile">
+                  Manabe&rsquo;s work helped establish how mathematical models can
+                  represent the physical processes that control Earth&rsquo;s climate.
+                </p>
+              </div>
+            </div><!-- /.scientist-identity-card -->
+
+            <!-- Timeline -->
+            <div class="scientist-timeline" id="manabe-timeline">
+              <h3 class="scientist-timeline__heading">From atmospheric columns to coupled climate models</h3>
+              <div class="scientist-timeline__note">Historical milestones &mdash; dates and descriptions are source-supported.</div>
+
+              <div class="timeline-track">
+                <div class="timeline-line" aria-hidden="true"></div>
+
+                <div class="timeline-node" data-tl="0">
+                  <div class="timeline-node__marker" aria-hidden="true"></div>
+                  <div class="timeline-node__date">1960s</div>
+                  <h4 class="timeline-node__title">Radiation and vertical transport</h4>
+                  <p class="timeline-node__desc">
+                    Manabe led the development of physical climate models and investigated
+                    the interaction between radiation balance and the vertical transport
+                    of air masses.
+                  </p>
+                </div>
+
+                <div class="timeline-node" data-tl="1">
+                  <div class="timeline-node__marker" aria-hidden="true"></div>
+                  <div class="timeline-node__date">1967</div>
+                  <h4 class="timeline-node__title">Radiative-convective atmosphere</h4>
+                  <p class="timeline-node__desc">
+                    Manabe and Richard Wetherald developed a one-dimensional,
+                    single-column model of the atmosphere in radiative-convective
+                    equilibrium. The work included the role of water-vapour feedback.
+                  </p>
+                </div>
+
+                <div class="timeline-node" data-tl="2">
+                  <div class="timeline-node__marker" aria-hidden="true"></div>
+                  <div class="timeline-node__date">1969</div>
+                  <h4 class="timeline-node__title">Coupled ocean&ndash;atmosphere simulation</h4>
+                  <p class="timeline-node__desc">
+                    Manabe and Kirk Bryan published simulations using a coupled
+                    ocean&ndash;atmosphere model, combining atmospheric and ocean
+                    circulation.
+                  </p>
+                </div>
+
+                <div class="timeline-node" data-tl="3">
+                  <div class="timeline-node__marker" aria-hidden="true"></div>
+                  <div class="timeline-node__date">2021</div>
+                  <h4 class="timeline-node__title">Nobel recognition</h4>
+                  <p class="timeline-node__desc">
+                    Manabe shared half of the 2021 Nobel Prize in Physics with Klaus
+                    Hasselmann for contributions to the physical modelling of
+                    Earth&rsquo;s climate, quantifying variability, and reliably
+                    predicting global warming.
+                  </p>
+                </div>
+              </div><!-- /.timeline-track -->
+            </div><!-- /.scientist-timeline -->
+
+          </div><!-- /.scientist-slide-left -->
+
+
+          <!-- ── RIGHT: VISUAL + INTERACTIVE ───────────────────── -->
+          <div class="scientist-slide-right">
+
+            <!-- Interactive SVG visual -->
+            <div class="scientist-visual-panel" data-anim>
+              <h3 class="scientist-visual-panel__heading">How Manabe&rsquo;s model connects physics</h3>
+              <span class="conceptual-tag">Conceptual model &mdash; simplified, not to scale.</span>
+
+              <!-- SVG: layered atmosphere -->
+              <div class="manabe-svg-wrap" aria-hidden="false">
+                <svg viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg"
+                     id="manabe-atmosphere-svg"
+                     class="manabe-atmosphere-svg" focusable="false"
+                     role="img" aria-labelledby="manabe-svg-title manabe-svg-desc">
+                  <title id="manabe-svg-title">Conceptual atmospheric model diagram</title>
+                  <desc id="manabe-svg-desc">
+                    A conceptual cross-section showing layered atmosphere above a curved
+                    Earth surface. Amber arrows represent incoming solar radiation.
+                    Warm orange arrows represent outgoing infrared radiation.
+                    Cyan arrows represent vertical convection.
+                    A subtle greenhouse-gas layer sits in the atmosphere.
+                    No numerical values are shown.
+                  </desc>
+
+                  <!-- Space background -->
+                  <rect width="400" height="260" fill="#080f1f" rx="6"/>
+
+                  <!-- Atmosphere layers -->
+                  <rect id="manabe-layer-upper" x="0" y="30" width="400" height="60"
+                        fill="#0c4a6e" opacity="0.15" class="manabe-svg-element"/>
+                  <rect id="manabe-layer-ghg" x="0" y="90" width="400" height="40"
+                        fill="#132144" opacity="0.25" class="manabe-svg-element"/>
+                  <rect id="manabe-layer-lower" x="0" y="130" width="400" height="80"
+                        fill="#0c4a6e" opacity="0.2" class="manabe-svg-element"/>
+
+                  <!-- Layer labels -->
+                  <text x="8" y="48" font-family="Consolas,monospace" font-size="8"
+                        fill="#7dd3fc" opacity="0.7">Upper atmosphere</text>
+                  <text x="8" y="106" font-family="Consolas,monospace" font-size="8"
+                        fill="#38bdf8" opacity="0.8">Greenhouse-gas layer</text>
+                  <text x="8" y="148" font-family="Consolas,monospace" font-size="8"
+                        fill="#7dd3fc" opacity="0.7">Lower atmosphere</text>
+
+                  <!-- Curved Earth surface -->
+                  <path d="M 0,210 Q 200,190 400,210 L 400,260 L 0,260 Z"
+                        fill="#132144" stroke="#34d399" stroke-width="1" id="manabe-surface"/>
+                  <text x="200" y="240" font-family="Segoe UI,sans-serif" font-size="9"
+                        fill="#34d399" text-anchor="middle" opacity="0.7">Earth surface</text>
+
+                  <!-- Incoming solar arrows (amber) -->
+                  <g id="manabe-arrow-solar" class="manabe-svg-element">
+                    <line x1="30" y1="10" x2="140" y2="180" stroke="#f5a623" stroke-width="2"
+                          stroke-linecap="round"/>
+                    <polygon points="140,180 128,172 138,188" fill="#f5a623"/>
+                    <line x1="70" y1="10" x2="180" y2="180" stroke="#f5a623" stroke-width="1.5"
+                          stroke-linecap="round" opacity="0.6"/>
+                    <polygon points="180,180 169,172 178,189" fill="#f5a623" opacity="0.6"/>
+                    <text x="30" y="100" font-family="Consolas,monospace" font-size="8"
+                          fill="#f5a623" transform="rotate(58 30 100)">Incoming sunlight</text>
+                  </g>
+
+                  <!-- Outgoing infrared (warm orange) -->
+                  <g id="manabe-arrow-infrared" class="manabe-svg-element">
+                    <line x1="220" y1="190" x2="220" y2="20" stroke="#f97316" stroke-width="2"
+                          stroke-linecap="round"/>
+                    <polygon points="220,15 214,32 226,32" fill="#f97316"/>
+                    <line x1="280" y1="195" x2="280" y2="30" stroke="#f97316" stroke-width="1.5"
+                          stroke-linecap="round" opacity="0.6"/>
+                    <polygon points="280,25 274,42 286,42" fill="#f97316" opacity="0.6"/>
+                    <text x="295" y="100" font-family="Consolas,monospace" font-size="8"
+                          fill="#f97316" transform="rotate(-90 295 100)">Outgoing infrared</text>
+                  </g>
+
+                  <!-- Vertical convection (cyan) -->
+                  <g id="manabe-arrow-convection" class="manabe-svg-element">
+                    <path d="M 120,200 Q 130,160 120,120 Q 110,80 130,40"
+                          fill="none" stroke="#38bdf8" stroke-width="2"
+                          stroke-linecap="round" stroke-dasharray="5 3"/>
+                    <polygon points="130,40 124,56 136,56" fill="#38bdf8"/>
+                    <path d="M 340,200 Q 350,160 340,120 Q 330,80 350,40"
+                          fill="none" stroke="#38bdf8" stroke-width="1.5"
+                          stroke-linecap="round" stroke-dasharray="5 3" opacity="0.6"/>
+                    <polygon points="350,40 344,56 356,56" fill="#38bdf8" opacity="0.6"/>
+                    <text x="100" y="100" font-family="Consolas,monospace" font-size="8"
+                          fill="#38bdf8" opacity="0.8">Convection</text>
+                  </g>
+
+                  <!-- Greenhouse-gas interaction indicator -->
+                  <g id="manabe-arrow-ghg" class="manabe-svg-element">
+                    <circle cx="250" cy="108" r="3" fill="#38bdf8" opacity="0.5"/>
+                    <circle cx="270" cy="112" r="2.5" fill="#38bdf8" opacity="0.4"/>
+                    <circle cx="200" cy="115" r="3" fill="#38bdf8" opacity="0.5"/>
+                    <circle cx="180" cy="100" r="2" fill="#38bdf8" opacity="0.4"/>
+                    <text x="300" y="108" font-family="Consolas,monospace" font-size="7"
+                          fill="#38bdf8" opacity="0.6">GHG</text>
+                  </g>
+
+                  <!-- Surface temperature indicator -->
+                  <g id="manabe-arrow-surface" class="manabe-svg-element">
+                    <rect x="160" y="195" width="80" height="6" rx="3"
+                          fill="#f97316" opacity="0.3"/>
+                    <text x="200" y="188" font-family="Consolas,monospace" font-size="7"
+                          fill="#fdba74" text-anchor="middle" opacity="0.7">Surface temperature</text>
+                  </g>
+
+                </svg>
+              </div><!-- /.manabe-svg-wrap -->
+
+              <!-- Interactive step buttons -->
+              <div class="scientist-interactive" data-anim>
+                <div id="manabe-step-status" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+                <div class="scientist-step-buttons" id="manabe-steps" role="group"
+                     aria-label="Select a physical process step">
+                  <button class="scientist-step scientist-step--active" type="button"
+                          data-step="0" aria-pressed="true">
+                    <span class="scientist-step__num">1</span>
+                    <span class="scientist-step__label">Radiation balance</span>
+                  </button>
+                  <button class="scientist-step" type="button" data-step="1" aria-pressed="false">
+                    <span class="scientist-step__num">2</span>
+                    <span class="scientist-step__label">Atmospheric composition</span>
+                  </button>
+                  <button class="scientist-step" type="button" data-step="2" aria-pressed="false">
+                    <span class="scientist-step__num">3</span>
+                    <span class="scientist-step__label">Vertical transport</span>
+                  </button>
+                  <button class="scientist-step" type="button" data-step="3" aria-pressed="false">
+                    <span class="scientist-step__num">4</span>
+                    <span class="scientist-step__label">Surface temperature</span>
+                  </button>
+                  <button class="scientist-step" type="button" data-step="4" aria-pressed="false">
+                    <span class="scientist-step__num">5</span>
+                    <span class="scientist-step__label">Model experiment</span>
+                  </button>
+                </div>
+
+                <div class="scientist-step-panel" id="manabe-panel"
+                     role="region" aria-live="polite" aria-atomic="true"
+                     aria-label="Physical process explanation">
+                  <span class="badge badge--amber scientist-step-tag">PHYSICS</span>
+                  <p class="scientist-step-panel__text" id="manabe-panel-text">
+                    The climate system receives energy from the Sun and emits
+                    infrared radiation.
+                  </p>
+                </div>
+              </div><!-- /.scientist-interactive -->
+            </div><!-- /.scientist-visual-panel -->
+
+            <!-- Featured contribution card -->
+            <div class="scientist-contribution-card" data-anim>
+              <h3 class="scientist-contribution-card__heading">Manabe&rsquo;s central contribution</h3>
+              <p class="scientist-contribution-card__text">
+                He showed that physical climate models could connect atmospheric
+                composition with surface temperature and could be used to investigate
+                the response of the climate system.
+              </p>
+            </div>
+
+            <!-- Why it matters -->
+            <div class="scientist-why-panel" data-anim>
+              <h3 class="scientist-why-panel__heading">Why it matters</h3>
+              <p class="scientist-why-panel__text">
+                Modern climate models are much more detailed than early models, but
+                the central strategy remains physical: represent important processes,
+                compare simulations with observations, and test how the system responds
+                to changes.
+              </p>
+            </div>
+
+            <!-- Limitations -->
+            <div class="scientist-limitations" data-anim>
+              <p>
+                Early models were simplified compared with modern Earth-system models.
+                Simplification does not make them useless; it makes the physical question
+                clearer, provided their assumptions and limits are stated.
+              </p>
+            </div>
+
+          </div><!-- /.scientist-slide-right -->
+
+        </div><!-- /.scientist-slide-layout -->
+
+        <!-- Tags -->
+        <div class="slide-tags" data-anim>
+          <span class="badge badge--cyan">Scientist</span>
+          <span class="badge badge--amber">Physical Model</span>
+          <span class="badge badge--cyan">Historical Foundation</span>
+        </div>
+
+        <!-- ── MEDIA SLOT: Manabe profile image ── -->
+        <!-- APPROVED: manabe.jpg -->
+        <div id="manabe-media" class="media-slot" data-topic="manabe">
+
+          <figure class="media-presentation-card media-presentation-card--portrait">
+            <div class="media-presentation-card__label">
+              LOCAL MEDIA &mdash; SCIENTIST PROFILE
+            </div>
+            <img
+              src="assets/images/manabe.jpg"
+              alt="Syukuro Manabe holding the Nobel Prize in Physics 2021 medal. Text on the medal case reads: SYUKURO MANABE, THE NOBEL PRIZE IN PHYSICS 2021."
+              class="media-presentation-card__portrait"
+              loading="lazy"/>
+            <figcaption class="media-caption">
+              Syukuro Manabe with the Nobel Prize in Physics 2021 medal.
+            </figcaption>
+            <p class="media-credit">
+              Source: Nobel Prize 2021 Laureates &mdash; Nobel Prize Outreach.<br>
+              Credit: Nobel Prize Outreach.
+            </p>
+          </figure>
+
+        </div><!-- /#manabe-media -->
+
+        <!-- Sources -->
+        <p class="slide-source" data-anim>Source: NobelPrize.org, The Nobel Prize in Physics 2021 &mdash; Popular science.</p>
+        <p class="slide-source" data-anim>Source: NobelPrize.org, Syukuro Manabe &mdash; Biographical.</p>
+        <p class="slide-source" data-anim>Source: NOAA GFDL, Syukuro Manabe biography and scientific contributions.</p>
+
+      </div><!-- /.slide__inner -->
+    </section>
+
+
+    <!-- ── SLIDE 9: Klaus Hasselmann ───────────────────────────── -->
+    <section
+      class="slide slide--content"
+      id="slide-hasselmann"
+      aria-label="Klaus Hasselmann — Nobel Laureate"
+      data-slide="9">
+
+      <span class="slide__number" aria-hidden="true">09</span>
+
+      <div class="slide__inner">
+
+        <span class="slide-eyebrow">08 / SIGNAL FROM NOISE</span>
+
+        <h2 class="slide-title" data-anim>
+          Klaus Hasselmann made long-term climate signals visible.
+        </h2>
+
+        <p class="slide-intro scientist-subtitle" data-anim>
+          He connected rapidly changing weather with slowly changing climate.
+        </p>
+
+        <!-- ── TWO-COLUMN LAYOUT ────────────────────────────────── -->
+        <div class="scientist-slide-layout" data-anim>
+
+          <!-- ── LEFT: IDENTITY + TIMELINE ─────────────────────── -->
+          <div class="scientist-slide-left">
+
+            <!-- Identity card -->
+            <div class="scientist-identity-card" aria-label="Scientist identity">
+              <div class="scientist-identity-card__visual" aria-hidden="true">
+                <svg viewBox="0 0 120 140" xmlns="http://www.w3.org/2000/svg"
+                     class="scientist-avatar-mini" focusable="false">
+                  <title>Abstract profile illustration for Hasselmann</title>
+                  <rect width="120" height="140" fill="#0d1a35" rx="8"/>
+                  <!-- Signal wave background -->
+                  <path d="M0,70 Q15,55 30,70 Q45,85 60,70 Q75,55 90,70 Q105,85 120,70"
+                        fill="none" stroke="#38bdf8" stroke-width="0.8" opacity="0.25"/>
+                  <path d="M0,85 Q20,72 40,85 Q60,98 80,85 Q100,72 120,85"
+                        fill="none" stroke="#f5a623" stroke-width="1.5" opacity="0.3"/>
+                  <!-- Figure -->
+                  <circle cx="60" cy="48" r="18" fill="#132144" stroke="#f5a623" stroke-width="1.5"/>
+                  <rect x="42" y="66" width="36" height="42" rx="8"
+                        fill="#132144" stroke="#f5a623" stroke-width="1.5"/>
+                  <!-- Nobel star -->
+                  <text x="96" y="14" font-family="Segoe UI,sans-serif"
+                        font-size="12" fill="#f5a623" text-anchor="middle">&#9733;</text>
+                </svg>
+              </div>
+
+              <div class="scientist-identity-card__info">
+                <h3 class="scientist-identity-card__name">Klaus Hasselmann</h3>
+                <dl class="scientist-identity-card__meta">
+                  <dt>Role</dt>
+                  <dd>Climate scientist and developer of stochastic climate methods</dd>
+                  <dt>Prize</dt>
+                  <dd>Half of the 2021 Nobel Prize in Physics</dd>
+                </dl>
+                <div class="scientist-identity-card__citation">
+                  <div class="citation-label">Nobel citation</div>
+                  <p class="citation-text">
+                    For the physical modelling of Earth&rsquo;s climate, quantifying
+                    variability and reliably predicting global warming.
+                  </p>
+                </div>
+                <p class="scientist-identity-card__profile">
+                  Hasselmann developed ways to understand how chaotic weather
+                  variability affects climate and how characteristic signals can
+                  be identified in observations.
+                </p>
+              </div>
+            </div><!-- /.scientist-identity-card -->
+
+            <!-- Timeline -->
+            <div class="scientist-timeline" id="hasselmann-timeline">
+              <h3 class="scientist-timeline__heading">From weather variability to climate fingerprints</h3>
+              <div class="scientist-timeline__note">Historical milestones &mdash; dates and descriptions are source-supported.</div>
+
+              <div class="timeline-track">
+                <div class="timeline-line" aria-hidden="true"></div>
+
+                <div class="timeline-node" data-tl="0">
+                  <div class="timeline-node__marker" aria-hidden="true"></div>
+                  <div class="timeline-node__date">1970s</div>
+                  <h4 class="timeline-node__title">Weather and climate connection</h4>
+                  <p class="timeline-node__desc">
+                    Hasselmann developed approaches linking rapidly changing
+                    weather with slower climate evolution.
+                  </p>
+                </div>
+
+                <div class="timeline-node" data-tl="1">
+                  <div class="timeline-node__marker" aria-hidden="true"></div>
+                  <div class="timeline-node__date">Around 1980</div>
+                  <h4 class="timeline-node__title">Weather as noise</h4>
+                  <p class="timeline-node__desc">
+                    Hasselmann demonstrated how chaotically changing weather
+                    phenomena can be described as rapidly changing noise in
+                    climate analysis.
+                  </p>
+                </div>
+
+                <div class="timeline-node" data-tl="2">
+                  <div class="timeline-node__marker timeline-node__marker--concept" aria-hidden="true"></div>
+                  <div class="timeline-node__date timeline-node__date--concept">Concept milestone</div>
+                  <h4 class="timeline-node__title">Signal fingerprints</h4>
+                  <p class="timeline-node__desc">
+                    He developed methods for identifying characteristic signals
+                    associated with natural phenomena and human activities.
+                  </p>
+                </div>
+
+                <div class="timeline-node" data-tl="3">
+                  <div class="timeline-node__marker" aria-hidden="true"></div>
+                  <div class="timeline-node__date">2021</div>
+                  <h4 class="timeline-node__title">Nobel recognition</h4>
+                  <p class="timeline-node__desc">
+                    Hasselmann shared half of the 2021 Nobel Prize in Physics
+                    with Syukuro Manabe for contributions to climate modelling,
+                    climate variability, and reliable prediction.
+                  </p>
+                </div>
+              </div><!-- /.timeline-track -->
+            </div><!-- /.scientist-timeline -->
+
+          </div><!-- /.scientist-slide-left -->
+
+
+          <!-- ── RIGHT: VISUAL + INTERACTIVE ───────────────────── -->
+          <div class="scientist-slide-right">
+
+            <!-- Signal and noise visual -->
+            <div class="scientist-visual-panel" data-anim>
+              <h3 class="scientist-visual-panel__heading">Signal versus noise</h3>
+              <span class="conceptual-tag">Conceptual demonstration &mdash; not measured data.</span>
+
+              <div class="signal-noise-chart-wrap" aria-hidden="true">
+                <svg id="signal-noise-svg"
+                     viewBox="0 0 560 200"
+                     xmlns="http://www.w3.org/2000/svg"
+                     focusable="false"
+                     class="signal-noise-svg">
+                  <title>Conceptual signal and noise illustration</title>
+                  <desc>
+                    A conceptual diagram showing short-term weather variability as a jagged
+                    cyan line and a long-term climate signal as a smooth amber curve. A
+                    shaded region indicates where variability can obscure the signal.
+                    No measured data is shown.
+                  </desc>
+
+                  <rect width="560" height="200" fill="#080f1f" rx="6"/>
+
+                  <!-- Shaded region: variability can obscure signal -->
+                  <rect x="40" y="60" width="510" height="60" fill="#38bdf8" opacity="0.04"/>
+                  <text x="295" y="48" font-family="Consolas,monospace" font-size="8"
+                        fill="#6a80a0" text-anchor="middle" opacity="0.8">Variability can obscure the signal</text>
+
+                  <!-- Axes -->
+                  <line x1="40" y1="10" x2="40" y2="170" stroke="#2a4a80" stroke-width="1.5"/>
+                  <line x1="40" y1="170" x2="550" y2="170" stroke="#2a4a80" stroke-width="1.5"/>
+
+                  <!-- Axis labels — no numerical values -->
+                  <text x="295" y="190" font-family="Consolas,monospace" font-size="9"
+                        fill="#6a80a0" text-anchor="middle">Time</text>
+                  <text x="14" y="100" font-family="Consolas,monospace" font-size="9"
+                        fill="#6a80a0" text-anchor="middle"
+                        transform="rotate(-90 14 100)">Response</text>
+
+                  <!-- Noise polyline — redrawn by JS when slider changes -->
+                  <polyline id="sn-noise-line"
+                    points="44,100 55,78 66,118 77,62 88,108 99,55 110,112 121,70 132,105 143,50 154,98 165,65 176,115 187,48 198,102 209,72 220,118 231,55 242,96 253,68 264,112 275,52 286,100 297,74 308,120 319,58 330,104 341,70 352,116 363,52 374,96 385,68 396,118 407,54 418,100 429,72 440,116 451,55 462,98 473,68 484,112 495,56 506,100 517,74 528,112 539,58 548,95"
+                    fill="none" stroke="#38bdf8" stroke-width="1.5"
+                    stroke-linejoin="round" stroke-linecap="round" opacity="0.65"/>
+
+                  <!-- Smooth trend line -->
+                  <path id="sn-trend-line"
+                    d="M 44,108 C 150,105 250,100 350,92 C 450,84 520,78 548,74"
+                    fill="none" stroke="#f5a623" stroke-width="3" stroke-linecap="round"/>
+
+                  <!-- Inline labels -->
+                  <text x="50" y="30" font-family="Consolas,monospace" font-size="8"
+                        fill="#38bdf8" opacity="0.9">Short-term weather variability</text>
+                  <text x="380" y="62" font-family="Consolas,monospace" font-size="8"
+                        fill="#f5a623">Long-term climate signal</text>
+                </svg>
+              </div><!-- /.signal-noise-chart-wrap -->
+
+              <!-- Slider -->
+              <div class="signal-noise-controls">
+                <label class="sn-slider-label" for="sn-amplitude-slider">
+                  Short-term variability
+                </label>
+                <input
+                  id="sn-amplitude-slider"
+                  class="sn-slider"
+                  type="range"
+                  min="0"
+                  max="100"
+                  step="1"
+                  value="45"
+                  aria-label="Adjust conceptual noise amplitude &mdash; illustration only, not a climate measurement"/>
+                <p class="sn-slider-note">
+                  Illustration only: changing the slider changes visual noise amplitude,
+                  not a real climate record.
+                </p>
+              </div>
+            </div><!-- /.scientist-visual-panel -->
+
+            <!-- Fingerprint cards -->
+            <div class="fingerprint-section" data-anim>
+              <h3 class="fingerprint-section__heading">Signal fingerprints</h3>
+              <div id="fp-status" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+              <div class="fingerprint-cards" id="fingerprint-cards" role="group"
+                   aria-label="Select a fingerprint concept">
+
+                <button class="fingerprint-card fingerprint-card--solar" type="button"
+                        data-fp="0" aria-pressed="true">
+                  <div class="fingerprint-card__label">SOLAR INFLUENCE</div>
+                  <h4 class="fingerprint-card__heading">Solar influence</h4>
+                  <p class="fingerprint-card__text">
+                    Changes in solar radiation can leave a physically distinctive
+                    influence on the climate system.
+                  </p>
+                </button>
+
+                <button class="fingerprint-card fingerprint-card--volcanic" type="button"
+                        data-fp="1" aria-pressed="false">
+                  <div class="fingerprint-card__label">VOLCANIC INFLUENCE</div>
+                  <h4 class="fingerprint-card__heading">Volcanic influence</h4>
+                  <p class="fingerprint-card__text">
+                    Volcanic particles can affect atmospheric conditions and radiation.
+                  </p>
+                </button>
+
+                <button class="fingerprint-card fingerprint-card--human" type="button"
+                        data-fp="2" aria-pressed="false">
+                  <div class="fingerprint-card__label">HUMAN INFLUENCE</div>
+                  <h4 class="fingerprint-card__heading">Human influence</h4>
+                  <p class="fingerprint-card__text">
+                    Increased greenhouse-gas concentrations can leave a characteristic
+                    pattern in the climate system.
+                  </p>
+                </button>
+
+              </div><!-- /.fingerprint-cards -->
+
+              <div class="fingerprint-panel" id="fingerprint-panel"
+                   role="region" aria-live="polite" aria-atomic="true"
+                   aria-label="Fingerprint concept explanation">
+                <span class="badge badge--amber fingerprint-panel-tag">FINGERPRINT CONCEPT</span>
+                <p class="fingerprint-panel__text" id="fingerprint-panel-text">
+                  Changes in solar radiation can leave a physically distinctive
+                  influence on the climate system.
+                </p>
+              </div>
+            </div><!-- /.fingerprint-section -->
+
+            <!-- Why it matters -->
+            <div class="scientist-why-panel" data-anim>
+              <h3 class="scientist-why-panel__heading">Why Hasselmann&rsquo;s work matters</h3>
+              <p class="scientist-why-panel__text">
+                Climate observations contain both short-term variability and
+                longer-term signals. Hasselmann&rsquo;s methods helped scientists
+                study how signals can be identified within a noisy, changing system.
+              </p>
+            </div>
+
+            <!-- Featured callout -->
+            <div class="callout callout--info" data-anim>
+              <span class="callout__icon" aria-hidden="true">&#128270;</span>
+              <div class="callout__content">
+                <div class="callout__title">Key idea</div>
+                <p class="callout__text">
+                  Reliable climate science does not require weather to be predictable
+                  for decades. It requires long-term signals to be distinguishable
+                  from short-term variability.
+                </p>
+              </div>
+            </div>
+
+            <!-- Limitations -->
+            <div class="scientist-limitations" data-anim>
+              <p>
+                Signal detection depends on observations, physical understanding,
+                statistical methods, and assumptions. A conceptual visual cannot
+                replace a formal attribution study.
+              </p>
+            </div>
+
+          </div><!-- /.scientist-slide-right -->
+
+        </div><!-- /.scientist-slide-layout -->
+
+        <!-- Tags -->
+        <div class="slide-tags" data-anim>
+          <span class="badge badge--cyan">Scientist</span>
+          <span class="badge badge--amber">Variability</span>
+          <span class="badge badge--cyan">Fingerprinting</span>
+          <span class="badge badge--amber">Attribution</span>
+        </div>
+
+        <!-- ── MEDIA SLOT: Hasselmann profile image ── -->
+        <!-- APPROVED: hasselmann.jpg — © Johan Jarnestad / The Royal Swedish Academy of Sciences -->
+        <div id="hasselmann-media" class="media-slot" data-topic="hasselmann">
+
+          <figure class="media-presentation-card media-presentation-card--portrait">
+            <div class="media-presentation-card__label">LOCAL MEDIA &mdash; SCIENTIST PROFILE</div>
+            <img
+              src="assets/images/hasselmann.jpg"
+              alt="Klaus Hasselmann holding the Nobel Prize in Physics 2021 medal at the Nobel Prize ceremony. Source: Nobel Prize Outreach. Credit: © Johan Jarnestad / The Royal Swedish Academy of Sciences."
+              class="media-presentation-card__portrait"
+              loading="lazy"/>
+            <figcaption class="media-caption">
+              Klaus Hasselmann with the Nobel Prize in Physics 2021 medal.
+            </figcaption>
+            <p class="media-credit">
+              Source: Nobel Prize 2021 Laureates &mdash; Nobel Prize Outreach.<br>
+              Credit: &copy;&nbsp;Johan Jarnestad&nbsp;/&nbsp;The Royal Swedish Academy of Sciences.
+            </p>
+          </figure>
+
+        </div><!-- /#hasselmann-media -->
+
+        <!-- Sources -->
+        <p class="slide-source" data-anim>Source: NobelPrize.org, The Nobel Prize in Physics 2021 &mdash; Popular science.</p>
+        <p class="slide-source" data-anim>Source: NobelPrize.org, Press release for the 2021 Nobel Prize in Physics.</p>
+        <p class="slide-source" data-anim>Source: NobelPrize.org, Klaus Hasselmann &mdash; Biographical.</p>
+
+      </div><!-- /.slide__inner -->
+    </section>
+
+
+    <!-- ── SLIDE 10: Feedbacks, Uncertainty and Scenarios ──────── -->
+    <section
+      class="slide slide--content"
+      id="slide-feedbacks"
+      aria-label="Feedbacks, Uncertainty and Scenarios"
+      data-slide="10">
+
+      <span class="slide__number" aria-hidden="true">10</span>
+
+      <div class="slide__inner">
+
+        <span class="slide-eyebrow">09 / RESPONSE AND UNCERTAINTY</span>
+
+        <h2 class="slide-title" data-anim>
+          Climate response includes feedbacks, uncertainty, and choices.
+        </h2>
+
+        <p class="slide-intro" data-anim>
+          An initial change in Earth&rsquo;s energy balance can trigger processes
+          that amplify or reduce the response. Future climate projections also
+          depend on natural variability, model limitations, and future human
+          decisions.
+        </p>
+
+        <!-- ── FEEDBACK EXPLORER ───────────────────────────────── -->
+        <div class="feedback-section" data-anim>
+
+          <h3 class="s10-section-heading">Climate feedbacks</h3>
+          <div id="feedback-status" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+          <div class="feedback-cards" id="feedback-cards" role="group"
+               aria-label="Select a feedback to explore">
+
+            <button class="feedback-card feedback-card--amplify" type="button"
+                    id="fb-card-1" data-feedback="0" aria-pressed="true">
+              <div class="feedback-card__type">AMPLIFYING FEEDBACK</div>
+              <div class="feedback-card__label">Ice&ndash;Albedo</div>
+              <p class="feedback-card__heading">Less bright ice can mean more absorbed sunlight.</p>
+            </button>
+
+            <button class="feedback-card feedback-card--amplify" type="button"
+                    id="fb-card-2" data-feedback="1" aria-pressed="false">
+              <div class="feedback-card__type">AMPLIFYING FEEDBACK</div>
+              <div class="feedback-card__label">Water Vapour</div>
+              <p class="feedback-card__heading">Warming air can hold more water vapour.</p>
+            </button>
+
+            <button class="feedback-card feedback-card--atmospheric" type="button"
+                    id="fb-card-3" data-feedback="2" aria-pressed="false">
+              <div class="feedback-card__type">ATMOSPHERIC FEEDBACK</div>
+              <div class="feedback-card__label">Lapse Rate</div>
+              <p class="feedback-card__heading">Atmospheric temperature structure can change.</p>
+            </button>
+
+            <button class="feedback-card feedback-card--complex" type="button"
+                    id="fb-card-4" data-feedback="3" aria-pressed="false">
+              <div class="feedback-card__type">COMPLEX FEEDBACK</div>
+              <div class="feedback-card__label">Clouds</div>
+              <p class="feedback-card__heading">Cloud effects depend on their properties and location.</p>
+            </button>
+
+          </div><!-- /.feedback-cards -->
+
+          <div class="feedback-panel" id="feedback-panel"
+               role="region" aria-live="polite" aria-atomic="true"
+               aria-label="Feedback explanation">
+            <p class="feedback-panel__text" id="feedback-panel-text">
+              Snow and ice reflect sunlight. If bright surfaces decline, darker
+              land or ocean can absorb more solar energy, which can contribute
+              to additional warming.
+            </p>
+          </div>
+
+          <p class="feedback-note">
+            <strong>Note:</strong> Positive feedback amplifies an initial change;
+            negative feedback reduces an initial change. These terms do not mean
+            beneficial or harmful.
+          </p>
+
+        </div><!-- /.feedback-section -->
+
+
+        <!-- ── UNCERTAINTY SOURCES ─────────────────────────────── -->
+        <div class="uncertainty-section" data-anim>
+
+          <h3 class="s10-section-heading">Where does uncertainty come from?</h3>
+
+          <div class="uncertainty-cards">
+
+            <div class="uncertainty-card">
+              <div class="uncertainty-card__num">01</div>
+              <div class="uncertainty-card__label">Internal variability</div>
+              <p class="uncertainty-card__text">The climate system varies naturally over short and medium timescales.</p>
+            </div>
+
+            <div class="uncertainty-card">
+              <div class="uncertainty-card__num">02</div>
+              <div class="uncertainty-card__label">Observations</div>
+              <p class="uncertainty-card__text">Measurements have limits in coverage, length, and precision.</p>
+            </div>
+
+            <div class="uncertainty-card">
+              <div class="uncertainty-card__num">03</div>
+              <div class="uncertainty-card__label">Model structure</div>
+              <p class="uncertainty-card__text">Models represent a complex system using mathematical approximations.</p>
+            </div>
+
+            <div class="uncertainty-card">
+              <div class="uncertainty-card__num">04</div>
+              <div class="uncertainty-card__label">Future pathways</div>
+              <p class="uncertainty-card__text">Future emissions, land use, technology, and policies are not known in advance.</p>
+            </div>
+
+          </div><!-- /.uncertainty-cards -->
+
+          <!-- Uncertainty stack visual -->
+          <div class="uncertainty-stack" aria-hidden="true">
+            <div class="uncertainty-stack__label">Uncertainty is described, not hidden.</div>
+            <div class="uncertainty-stack__layers">
+              <div class="unc-layer unc-layer--1">Natural variability</div>
+              <div class="unc-layer unc-layer--2">Model uncertainty</div>
+              <div class="unc-layer unc-layer--3">Scenario uncertainty</div>
+              <div class="unc-layer unc-layer--4">Projected range</div>
+            </div>
+          </div>
+
+        </div><!-- /.uncertainty-section -->
+
+
+        <!-- ── SCENARIO EXPLORER ───────────────────────────────── -->
+        <div class="scenario-section" data-anim>
+
+          <h3 class="s10-section-heading">Scenarios are conditional pathways, not forecasts.</h3>
+          <div id="scenario-status" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+          <div class="scenario-cards" id="scenario-cards" role="group"
+               aria-label="Select a scenario to explore">
+
+            <button class="scenario-card scenario-card--low" type="button"
+                    data-scenario="0" aria-pressed="true">
+              <div class="scenario-card__label">Lower-Emissions Pathway</div>
+              <p class="scenario-card__text">Represents a future with strong emissions reductions and lower cumulative greenhouse-gas emissions.</p>
+            </button>
+
+            <button class="scenario-card scenario-card--mid" type="button"
+                    data-scenario="1" aria-pressed="false">
+              <div class="scenario-card__label">Intermediate Pathway</div>
+              <p class="scenario-card__text">Represents a future in which emissions change over time but do not follow the lowest or highest pathway.</p>
+            </button>
+
+            <button class="scenario-card scenario-card--high" type="button"
+                    data-scenario="2" aria-pressed="false">
+              <div class="scenario-card__label">Higher-Emissions Pathway</div>
+              <p class="scenario-card__text">Represents a future with higher greenhouse-gas emissions and greater long-term forcing.</p>
+            </button>
+
+          </div><!-- /.scenario-cards -->
+
+          <div class="scenario-panel" id="scenario-panel"
+               role="region" aria-live="polite" aria-atomic="true"
+               aria-label="Scenario explanation">
+            <p class="scenario-panel__text" id="scenario-panel-text">
+              Each pathway is a conditional experiment. It asks: what climate
+              response would be possible if these assumptions about future drivers
+              were followed?
+            </p>
+          </div>
+
+          <p class="scenario-note">
+            Modelled scenarios and pathways are used to explore possible future
+            emissions and climate responses. They are not predictions or forecasts.
+          </p>
+
+        </div><!-- /.scenario-section -->
+
+
+        <!-- Tags -->
+        <div class="slide-tags" data-anim>
+          <span class="badge badge--cyan">Feedback</span>
+          <span class="badge badge--amber">Uncertainty</span>
+          <span class="badge badge--cyan">Scenario</span>
+        </div>
+
+        <!-- ── MEDIA SLOT: feedbacks / nature-response media ── -->
+        <!-- SOURCE PENDING — extreme-weather-events.jpg not placed until source/credit confirmed -->
+        <div id="feedbacks-media" class="media-slot" data-topic="feedbacks"
+             aria-label="Media placeholder — feedbacks or climate response"
+             hidden>
+          <!-- extreme-weather-events.jpg: source URL and credit are PENDING.
+               Topic confirmed as weather variability, suggested target Slide 9.
+               Will be placed when source, credit, and alt text are provided. -->
+        </div>
+
+        <!-- Sources -->
+        <p class="slide-source" data-anim>Source: IPCC AR6 Working Group I, Technical Summary.</p>
+        <p class="slide-source" data-anim>Source: IPCC AR6 Synthesis Report, Summary for Policymakers.</p>
+        <p class="slide-source" data-anim>Source: NASA Science, Global Warming.</p>
+
+      </div><!-- /.slide__inner -->
+    </section>
+
+
+    <!-- ── SLIDE 11: Conclusion and References ─────────────────── -->
+    <section
+      class="slide slide--content"
+      id="slide-conclusion"
+      aria-label="Conclusion and References"
+      data-slide="11">
+
+      <span class="slide__number" aria-hidden="true">11</span>
+
+      <div class="slide__inner">
+
+        <span class="slide-eyebrow">10 / THE SCIENTIFIC ANSWER</span>
+
+        <h2 class="slide-title" data-anim>
+          Reliable climate prediction is built from physics, evidence,
+          and careful reasoning.
+        </h2>
+
+        <!-- Central conclusion statement -->
+        <blockquote class="conclusion-statement" data-anim>
+          <p>
+            Earth&rsquo;s climate is a complex system, but complexity does not
+            make it unknowable. Physical laws, observations, models, and
+            statistical methods allow scientists to identify long-term climate
+            signals and evaluate future possibilities.
+          </p>
+        </blockquote>
+
+        <!-- Four pillars -->
+        <div class="conclusion-pillars" data-anim>
+
+          <div class="conclusion-pillar conclusion-pillar--physics">
+            <div class="conclusion-pillar__icon" aria-hidden="true">
+              <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" focusable="false">
+                <!-- Sun/energy icon -->
+                <circle cx="20" cy="20" r="8" fill="none" stroke="#f5a623" stroke-width="2"/>
+                <line x1="20" y1="4"  x2="20" y2="10" stroke="#f5a623" stroke-width="2" stroke-linecap="round"/>
+                <line x1="20" y1="30" x2="20" y2="36" stroke="#f5a623" stroke-width="2" stroke-linecap="round"/>
+                <line x1="4"  y1="20" x2="10" y2="20" stroke="#f5a623" stroke-width="2" stroke-linecap="round"/>
+                <line x1="30" y1="20" x2="36" y2="20" stroke="#f5a623" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="conclusion-pillar__label">Physics</div>
+            <p class="conclusion-pillar__text">Earth&rsquo;s energy balance and atmospheric composition provide the physical foundation for understanding warming.</p>
+          </div>
+
+          <div class="conclusion-pillar conclusion-pillar--obs">
+            <div class="conclusion-pillar__icon" aria-hidden="true">
+              <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" focusable="false">
+                <!-- Measurement bars icon -->
+                <rect x="6"  y="22" width="6" height="12" fill="#38bdf8" rx="1"/>
+                <rect x="17" y="14" width="6" height="20" fill="#38bdf8" rx="1"/>
+                <rect x="28" y="8"  width="6" height="26" fill="#38bdf8" rx="1"/>
+                <line x1="4" y1="34" x2="36" y2="34" stroke="#38bdf8" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <div class="conclusion-pillar__label">Observations</div>
+            <p class="conclusion-pillar__text">Independent measurements reveal changes across the atmosphere, ocean, ice, sea level, and ecosystems.</p>
+          </div>
+
+          <div class="conclusion-pillar conclusion-pillar--model">
+            <div class="conclusion-pillar__icon" aria-hidden="true">
+              <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" focusable="false">
+                <!-- Grid/model icon -->
+                <rect x="5" y="5" width="30" height="30" fill="none" stroke="#34d399" stroke-width="1.5" rx="2"/>
+                <line x1="5"  y1="15" x2="35" y2="15" stroke="#34d399" stroke-width="1" opacity="0.6"/>
+                <line x1="5"  y1="25" x2="35" y2="25" stroke="#34d399" stroke-width="1" opacity="0.6"/>
+                <line x1="15" y1="5"  x2="15" y2="35" stroke="#34d399" stroke-width="1" opacity="0.6"/>
+                <line x1="25" y1="5"  x2="25" y2="35" stroke="#34d399" stroke-width="1" opacity="0.6"/>
+              </svg>
+            </div>
+            <div class="conclusion-pillar__label">Models</div>
+            <p class="conclusion-pillar__text">Climate models translate physical understanding into simulations and conditional projections.</p>
+          </div>
+
+          <div class="conclusion-pillar conclusion-pillar--reasoning">
+            <div class="conclusion-pillar__icon" aria-hidden="true">
+              <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" focusable="false">
+                <!-- Magnifier/reasoning icon -->
+                <circle cx="17" cy="17" r="10" fill="none" stroke="#93c5fd" stroke-width="2"/>
+                <line x1="24" y1="24" x2="34" y2="34" stroke="#93c5fd" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="conclusion-pillar__label">Scientific Reasoning</div>
+            <p class="conclusion-pillar__text">Uncertainty is quantified, sources are examined, and conclusions are compared with evidence.</p>
+          </div>
+
+        </div><!-- /.conclusion-pillars -->
+
+
+        <!-- Scientist connection -->
+        <div class="conclusion-scientists" data-anim>
+          <h3 class="conclusion-scientists__heading">Why Manabe and Hasselmann matter</h3>
+          <p class="conclusion-scientists__text">
+            Manabe helped establish physical climate modelling and showed how
+            atmospheric composition is connected to temperature. Hasselmann
+            helped connect short-term weather variability with long-term climate
+            signals and methods of attribution.
+          </p>
+        </div>
+
+        <!-- Final callout -->
+        <div class="callout callout--info" data-anim>
+          <span class="callout__icon" aria-hidden="true">&#127758;</span>
+          <div class="callout__content">
+            <div class="callout__title">Closing thought</div>
+            <p class="callout__text">
+              Reliable prediction does not mean perfect certainty. It means that
+              the evidence, physics, methods, assumptions, and uncertainty are
+              made clear.
+            </p>
+          </div>
+        </div>
+
+        <!-- Navigation buttons -->
+        <div class="conclusion-nav" data-anim>
+          <button class="conclusion-nav__btn" type="button"
+                  id="btn-back-start"
+                  aria-label="Go back to the beginning of the presentation">
+            &#8592; Back to beginning
+          </button>
+          <button class="conclusion-nav__btn" type="button"
+                  id="btn-review-evidence"
+                  aria-label="Review the evidence section">
+            &#128269; Review evidence
+          </button>
+          <a class="conclusion-nav__btn conclusion-nav__btn--link"
+             href="#references"
+             aria-label="Jump to the references section on this slide">
+            &#128196; Open source log
+          </a>
+        </div>
+
+
+        <!-- ── REFERENCES ───────────────────────────────────────── -->
+        <div class="references-section" id="references" data-anim>
+
+          <h3 class="references-section__heading">References</h3>
+
+          <ol class="references-list">
+
+            <li class="ref-item">
+              <span class="ref-item__org">Nobel Prize Outreach.</span>
+              <span class="ref-item__title">&ldquo;The Nobel Prize in Physics 2021 &mdash; Popular information.&rdquo;</span>
+              <span class="ref-item__url">
+                <a href="https://www.nobelprize.org/prizes/physics/2021/popular-information/"
+                   target="_blank" rel="noopener noreferrer">
+                  nobelprize.org/prizes/physics/2021/popular-information/
+                </a>
+              </span>
+            </li>
+
+            <li class="ref-item">
+              <span class="ref-item__org">NASA Science.</span>
+              <span class="ref-item__title">&ldquo;Evidence of Climate Change.&rdquo;</span>
+              <span class="ref-item__url">
+                <a href="https://science.nasa.gov/climate-change/evidence/"
+                   target="_blank" rel="noopener noreferrer">
+                  science.nasa.gov/climate-change/evidence/
+                </a>
+              </span>
+            </li>
+
+            <li class="ref-item">
+              <span class="ref-item__org">NASA Earthdata.</span>
+              <span class="ref-item__title">&ldquo;Climate Indicators.&rdquo;</span>
+              <span class="ref-item__url">
+                <a href="https://www.earthdata.nasa.gov/topics/climate-indicators"
+                   target="_blank" rel="noopener noreferrer">
+                  earthdata.nasa.gov/topics/climate-indicators
+                </a>
+              </span>
+            </li>
+
+            <li class="ref-item">
+              <span class="ref-item__org">NASA GISS.</span>
+              <span class="ref-item__title">&ldquo;GISS Surface Temperature Analysis, GISTEMP v4.&rdquo;</span>
+              <span class="ref-item__url">
+                <a href="https://data.giss.nasa.gov/gistemp/"
+                   target="_blank" rel="noopener noreferrer">
+                  data.giss.nasa.gov/gistemp/
+                </a>
+              </span>
+            </li>
+
+            <li class="ref-item">
+              <span class="ref-item__org">NOAA Climate.gov.</span>
+              <span class="ref-item__title">&ldquo;Climate Models.&rdquo;</span>
+              <span class="ref-item__url">
+                <a href="https://www.climate.gov/maps-data/climate-data-primer/predicting-climate/climate-models"
+                   target="_blank" rel="noopener noreferrer">
+                  climate.gov/maps-data/climate-data-primer/predicting-climate/climate-models
+                </a>
+              </span>
+            </li>
+
+            <li class="ref-item">
+              <span class="ref-item__org">IPCC.</span>
+              <span class="ref-item__title">&ldquo;AR6 Working Group I Summary for Policymakers.&rdquo;</span>
+              <span class="ref-item__url">
+                <a href="https://www.ipcc.ch/report/ar6/wg1/chapter/summary-for-policymakers/"
+                   target="_blank" rel="noopener noreferrer">
+                  ipcc.ch/report/ar6/wg1/chapter/summary-for-policymakers/
+                </a>
+              </span>
+            </li>
+
+            <li class="ref-item">
+              <span class="ref-item__org">IPCC.</span>
+              <span class="ref-item__title">&ldquo;AR6 Synthesis Report Summary for Policymakers.&rdquo;</span>
+              <span class="ref-item__url">
+                <a href="https://www.ipcc.ch/report/ar6/syr/summary-for-policymakers/"
+                   target="_blank" rel="noopener noreferrer">
+                  ipcc.ch/report/ar6/syr/summary-for-policymakers/
+                </a>
+              </span>
+            </li>
+
+          </ol><!-- /.references-list -->
+
+          <p class="references-note">
+            Sources will be checked again when the final datasets, images, and
+            video credits are added.
+          </p>
+
+        </div><!-- /.references-section -->
+
+        <!-- Final status line -->
+        <p class="conclusion-status">
+          Offline classroom presentation &bull; Scientific content and media
+          must be verified before final submission. &bull;
+          Media credits and usage conditions are listed in
+          <code>docs/rights-checklist.md</code>.
+          Final rights verification is the presenter&rsquo;s responsibility.
+        </p>
+
+        <!-- ================================================================
+             MEDIA REVIEW PANEL (Slide 11)
+             All files begin as REVIEW REQUIRED.
+             No unapproved media is shown in the main presentation.
+             ================================================================ -->
+        <section class="media-review-panel" id="media-review"
+                 aria-labelledby="media-review-heading"
+                 hidden>
+
+          <h3 class="media-review__heading" id="media-review-heading">
+            Media review and source management
+          </h3>
+          <p class="media-review__intro">
+            <strong>Approved media appears in its scientific topic section above.</strong>
+            This panel is for administration. It is hidden in presentation mode.<br>
+            To show it: press <kbd>Shift+R</kbd> or add <code>?review=1</code> to the URL.
+          </p>
+
+          <!-- ── APPROVED AND PLACED ── -->
+          <h4 class="mrp-group-heading">Approved and placed</h4>
+          <div class="media-review-compact">
+
+            <div class="mrc-compact" data-file="global-energy-budget.jpg">
+              <span class="mrc__status mrc__status--approved">PLACED IN SLIDE 4</span>
+              <span class="mrc-compact__name">global-energy-budget.jpg</span>
+              <span class="mrc-compact__meta">Topic: energy budget &bull; Credit: NASA/JPL-Caltech</span>
+              <a class="mrc-compact__link" href="#greenhouse-media">Go to placement</a>
+            </div>
+
+            <div class="mrc-compact" data-file="greenhouse-effect.mp4">
+              <span class="mrc__status mrc__status--approved">PLACED IN SLIDE 4</span>
+              <span class="mrc-compact__name">greenhouse-effect.mp4</span>
+              <span class="mrc-compact__meta">Topic: greenhouse effect &bull; 17.1 s &bull; Credit: NASA/JPL-Caltech</span>
+              <a class="mrc-compact__link" href="#greenhouse-media">Go to placement</a>
+            </div>
+
+            <div class="mrc-compact" data-file="climate-spiral.mp4">
+              <span class="mrc__status mrc__status--approved">PLACED IN SLIDE 6</span>
+              <span class="mrc-compact__name">climate-spiral.mp4</span>
+              <span class="mrc-compact__meta">Topic: climate evidence &bull; Credit: NASA Scientific Visualization Studio; data: NASA GISS</span>
+              <span class="mrc-compact__warn">&#9888; Duration 20.02 s &mdash; exceeds 20-second guideline by 0.02 s. Keep until trimmed.</span>
+              <a class="mrc-compact__link" href="#evidence-video-card">Go to placement</a>
+            </div>
+
+            <div class="mrc-compact" data-file="manabe.jpg">
+              <span class="mrc__status mrc__status--approved">PLACED IN SLIDE 8</span>
+              <span class="mrc-compact__name">manabe.jpg</span>
+              <span class="mrc-compact__meta">Topic: Manabe profile &bull; Credit: Nobel Prize Outreach</span>
+              <span class="mrc-compact__warn">Source URL PENDING &mdash; verify before final submission.</span>
+              <a class="mrc-compact__link" href="#manabe-media">Go to placement</a>
+            </div>
+
+            <div class="mrc-compact" data-file="hasselmann.jpg">
+              <span class="mrc__status mrc__status--approved">PLACED IN SLIDE 9</span>
+              <span class="mrc-compact__name">hasselmann.jpg</span>
+              <span class="mrc-compact__meta">Topic: Hasselmann profile &bull; Credit: &copy; Johan Jarnestad / The Royal Swedish Academy of Sciences</span>
+              <span class="mrc-compact__warn">Source URL PENDING &mdash; verify before final submission.</span>
+              <a class="mrc-compact__link" href="#hasselmann-media">Go to placement</a>
+            </div>
+
+          </div><!-- /.media-review-compact -->
+
+          <!-- ── NOT SHOWN — SOURCE OR TOPIC PENDING ── -->
+          <h4 class="mrp-group-heading">Not shown in main presentation</h4>
+          <div class="media-review-grid">
+
+            <div class="mrc" data-file="extreme-weather-events.jpg" data-status="review">
+              <div class="mrc__header">
+                <span class="mrc__status mrc__status--review">SOURCE PENDING &mdash; NOT PLACED</span>
+                <span class="mrc__type">IMAGE</span>
+              </div>
+              <dl class="mrc__meta">
+                <dt>File</dt><dd>extreme-weather-events.jpg</dd>
+                <dt>Topic</dt><dd>Weather variability (confirmed by inspection)</dd>
+                <dt>Suggested target</dt><dd>Slide 9 &mdash; Hasselmann (weather as noise)</dd>
+                <dt>Source</dt><dd class="mrc__missing">PENDING &mdash; fill in source URL before placing</dd>
+                <dt>Credit</dt><dd class="mrc__missing">PENDING</dd>
+                <dt>Alt text</dt><dd class="mrc__missing">PENDING</dd>
+              </dl>
+              <p class="mrc__note">Not shown. Add source, credit, and alt text, then update manifest and re-approve.</p>
+            </div>
+
+            <div class="mrc" data-file="climate-change.mp4" data-status="review">
+              <div class="mrc__header">
+                <span class="mrc__status mrc__status--review">TOPIC CONFIRMATION REQUIRED</span>
+                <span class="mrc__type">VIDEO</span>
+              </div>
+              <dl class="mrc__meta">
+                <dt>File</dt><dd>climate-change.mp4</dd>
+                <dt>Duration</dt><dd>11.5 s (within 20-second guideline)</dd>
+                <dt>Dimensions</dt><dd>864 &times; 496 px</dd>
+                <dt>Topic</dt><dd class="mrc__missing">PENDING &mdash; watch the video and confirm topic</dd>
+                <dt>Target slide</dt><dd class="mrc__missing">PENDING</dd>
+                <dt>Source</dt><dd class="mrc__missing">PENDING</dd>
+                <dt>Credit</dt><dd class="mrc__missing">PENDING</dd>
+              </dl>
+              <p class="mrc__note">Not shown. Confirm topic and slide, then add source, credit, and caption before placing.</p>
+            </div>
+
+          </div><!-- /.media-review-grid -->
+
+          <p class="media-review__footer">
+            All media files are stored in <code>assets/images/</code> and <code>assets/videos/</code>.
+            See <code>data/media-manifest.json</code> and <code>docs/media-credits.md</code> for full inspection notes.
+            Media credits and usage conditions are listed in <code>docs/rights-checklist.md</code>.
+            Final rights verification is the presenter&rsquo;s responsibility.
+          </p>
+
+        </section><!-- /.media-review-panel -->
+
+      </div><!-- /.slide__inner -->
+    </section>
+
+
+  </main><!-- /#main-content -->
+
+
+  <!-- ================================================================
+       PREV / NEXT CONTROL BAR
+       Fixed at the bottom of the viewport. Suitable for classroom
+       presentation: large click targets, clear labels.
+       The JS in main.js wires the click handlers and manages
+       disabled state (Prev on slide 1, Next on slide 11).
+       ================================================================ -->
+  <nav class="slide-controls" aria-label="Slide navigation controls">
+
+    <button
+      class="slide-controls__btn nav-prev"
+      type="button"
+      aria-label="Previous slide (you are on the first slide)"
+      disabled>
+      <!-- Left arrow (HTML entity — no image needed) -->
+      <span class="slide-controls__arrow" aria-hidden="true">&#8592;</span>
+      <span class="slide-controls__label">Prev</span>
+    </button>
+
+    <!-- Progress readout duplicated here so it's visible near the buttons -->
+    <span class="slide-controls__counter" aria-hidden="true">
+      <!-- Filled by JS; the .slide-counter in the topbar is the live region -->
+      1 / 11
+    </span>
+
+    <button
+      class="slide-controls__btn nav-next"
+      type="button"
+      aria-label="Next slide: Weather vs Climate">
+      <span class="slide-controls__label">Next</span>
+      <span class="slide-controls__arrow" aria-hidden="true">&#8594;</span>
+    </button>
+
+  </nav><!-- /.slide-controls -->
+
+
+  <!--
+    ================================================================
+    SERVICE WORKER REGISTRATION
+    Registers sw.js so the site can be cached and used offline,
+    and can be installed as a PWA on Android / iOS / desktop.
+
+    Important notes:
+    - Service workers only activate over HTTPS or localhost.
+      Opening the file directly as file:// will skip registration
+      (the site still works fully offline via direct file opening).
+    - The SW scope is "./" so it covers the whole exhibition folder.
+    ================================================================
+  -->
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker
+          .register("./sw.js", { scope: "./" })
+          .then(function (reg) {
+            console.info(
+              "%c[SW] Registered — scope: " + reg.scope,
+              "color:#34d399"
+            );
+          })
+          .catch(function (err) {
+            // Registration failure is non-fatal.
+            // Site works without SW; just no offline caching.
+            console.warn("[SW] Registration failed:", err);
+          });
+      });
+    }
+  </script>
+
+  <!--
+    ================================================================
+    GISTEMP INLINE DATA — embedded so the graph works on file://
+    Data: NASA GISS Surface Temperature Analysis (GISTEMP v4)
+    Annual mean (J-D column), 1880–2025, baseline 1951–1980.
+    Source: https://data.giss.nasa.gov/gistemp/tabledata_v4/GLB.Ts+dSST.csv
+    Accessed: 2026-11-10
+    ================================================================
+  -->
+  <script>
+    var GISTEMP_INLINE = [{year:1880,anomaly:-0.17},{year:1881,anomaly:-0.09},{year:1882,anomaly:-0.11},{year:1883,anomaly:-0.18},{year:1884,anomaly:-0.28},{year:1885,anomaly:-0.33},{year:1886,anomaly:-0.31},{year:1887,anomaly:-0.36},{year:1888,anomaly:-0.18},{year:1889,anomaly:-0.11},{year:1890,anomaly:-0.36},{year:1891,anomaly:-0.22},{year:1892,anomaly:-0.27},{year:1893,anomaly:-0.31},{year:1894,anomaly:-0.30},{year:1895,anomaly:-0.23},{year:1896,anomaly:-0.11},{year:1897,anomaly:-0.11},{year:1898,anomaly:-0.28},{year:1899,anomaly:-0.18},{year:1900,anomaly:-0.08},{year:1901,anomaly:-0.16},{year:1902,anomaly:-0.28},{year:1903,anomaly:-0.37},{year:1904,anomaly:-0.47},{year:1905,anomaly:-0.26},{year:1906,anomaly:-0.22},{year:1907,anomaly:-0.38},{year:1908,anomaly:-0.42},{year:1909,anomaly:-0.48},{year:1910,anomaly:-0.44},{year:1911,anomaly:-0.44},{year:1912,anomaly:-0.37},{year:1913,anomaly:-0.34},{year:1914,anomaly:-0.15},{year:1915,anomaly:-0.14},{year:1916,anomaly:-0.36},{year:1917,anomaly:-0.46},{year:1918,anomaly:-0.30},{year:1919,anomaly:-0.27},{year:1920,anomaly:-0.27},{year:1921,anomaly:-0.18},{year:1922,anomaly:-0.28},{year:1923,anomaly:-0.26},{year:1924,anomaly:-0.27},{year:1925,anomaly:-0.22},{year:1926,anomaly:-0.11},{year:1927,anomaly:-0.22},{year:1928,anomaly:-0.20},{year:1929,anomaly:-0.36},{year:1930,anomaly:-0.15},{year:1931,anomaly:-0.09},{year:1932,anomaly:-0.16},{year:1933,anomaly:-0.28},{year:1934,anomaly:-0.13},{year:1935,anomaly:-0.20},{year:1936,anomaly:-0.15},{year:1937,anomaly:-0.03},{year:1938,anomaly:0.00},{year:1939,anomaly:-0.02},{year:1940,anomaly:0.12},{year:1941,anomaly:0.18},{year:1942,anomaly:0.06},{year:1943,anomaly:0.09},{year:1944,anomaly:0.20},{year:1945,anomaly:0.09},{year:1946,anomaly:-0.07},{year:1947,anomaly:-0.03},{year:1948,anomaly:-0.11},{year:1949,anomaly:-0.11},{year:1950,anomaly:-0.17},{year:1951,anomaly:-0.07},{year:1952,anomaly:0.01},{year:1953,anomaly:0.08},{year:1954,anomaly:-0.13},{year:1955,anomaly:-0.14},{year:1956,anomaly:-0.19},{year:1957,anomaly:0.05},{year:1958,anomaly:0.06},{year:1959,anomaly:0.03},{year:1960,anomaly:-0.02},{year:1961,anomaly:0.06},{year:1962,anomaly:0.03},{year:1963,anomaly:0.05},{year:1964,anomaly:-0.20},{year:1965,anomaly:-0.11},{year:1966,anomaly:-0.06},{year:1967,anomaly:-0.02},{year:1968,anomaly:-0.08},{year:1969,anomaly:0.05},{year:1970,anomaly:0.03},{year:1971,anomaly:-0.08},{year:1972,anomaly:0.01},{year:1973,anomaly:0.16},{year:1974,anomaly:-0.07},{year:1975,anomaly:-0.01},{year:1976,anomaly:-0.10},{year:1977,anomaly:0.18},{year:1978,anomaly:0.07},{year:1979,anomaly:0.16},{year:1980,anomaly:0.26},{year:1981,anomaly:0.32},{year:1982,anomaly:0.14},{year:1983,anomaly:0.31},{year:1984,anomaly:0.16},{year:1985,anomaly:0.12},{year:1986,anomaly:0.18},{year:1987,anomaly:0.32},{year:1988,anomaly:0.39},{year:1989,anomaly:0.27},{year:1990,anomaly:0.45},{year:1991,anomaly:0.41},{year:1992,anomaly:0.22},{year:1993,anomaly:0.23},{year:1994,anomaly:0.31},{year:1995,anomaly:0.45},{year:1996,anomaly:0.33},{year:1997,anomaly:0.47},{year:1998,anomaly:0.61},{year:1999,anomaly:0.38},{year:2000,anomaly:0.39},{year:2001,anomaly:0.53},{year:2002,anomaly:0.63},{year:2003,anomaly:0.62},{year:2004,anomaly:0.53},{year:2005,anomaly:0.68},{year:2006,anomaly:0.64},{year:2007,anomaly:0.66},{year:2008,anomaly:0.54},{year:2009,anomaly:0.66},{year:2010,anomaly:0.72},{year:2011,anomaly:0.61},{year:2012,anomaly:0.65},{year:2013,anomaly:0.67},{year:2014,anomaly:0.75},{year:2015,anomaly:0.89},{year:2016,anomaly:1.01},{year:2017,anomaly:0.91},{year:2018,anomaly:0.85},{year:2019,anomaly:0.98},{year:2020,anomaly:1.01},{year:2021,anomaly:0.85},{year:2022,anomaly:0.89},{year:2023,anomaly:1.17},{year:2024,anomaly:1.28},{year:2025,anomaly:1.18}];
+  </script>
+
+  <!--
+    ================================================================
+    JAVASCRIPT
+    Loaded at the bottom so the full DOM is available when it runs.
+    defer is also added as a belt-and-braces measure.
+    No external scripts — 100 % offline safe.
+    ================================================================
+  -->
+  <script src="js/main.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,183 @@
+/*
+ * variables.css
+ * ─────────────────────────────────────────────────────────────────
+ * Design system: colours, typography, spacing, and motion tokens.
+ * Everything in the site is built from these variables.
+ * Change a value here and it updates everywhere automatically.
+ * ─────────────────────────────────────────────────────────────────
+ */
+
+:root {
+
+  /* ── COLOUR PALETTE ──────────────────────────────────────────── */
+
+  /* Backgrounds — deep navy editorial dark theme */
+  --color-bg-base:      #080f1f;   /* page background              */
+  --color-bg-surface:   #0d1a35;   /* slide / card background      */
+  --color-bg-elevated:  #132144;   /* slightly lighter card/panel  */
+  --color-bg-overlay:   #1a2d58;   /* tooltips, modals             */
+
+  /* Text — off-white for WCAG AA contrast on dark backgrounds     */
+  /* Contrast ratio vs --color-bg-base  ≥ 7 : 1 (AAA)             */
+  --color-text-primary:   #e8edf5; /* main body text               */
+  --color-text-secondary: #a8b8d0; /* captions, labels             */
+  --color-text-muted:     #6a80a0; /* placeholders, disabled       */
+
+  /* Accent — amber (solar energy / incoming radiation)            */
+  /* Contrast on bg-base: ~6.5 : 1 — passes AA for large text     */
+  --color-amber:        #f5a623;
+  --color-amber-light:  #ffc85a;
+  --color-amber-dim:    #7a5010;
+
+  /* Accent — cyan (ocean, outgoing radiation, cold)               */
+  /* Contrast on bg-base: ~5.5 : 1 — passes AA for large text     */
+  --color-cyan:         #38bdf8;
+  --color-cyan-light:   #7dd3fc;
+  --color-cyan-dim:     #0c4a6e;
+
+  /* Accent — red-orange  (warming signal ONLY)                    */
+  /* Used sparingly to mark temperature anomalies / danger         */
+  --color-warm:         #f97316;
+  --color-warm-light:   #fdba74;
+  --color-warm-dim:     #7c2d12;
+
+  /* Accent — green (positive, vegetation, solutions)              */
+  --color-green:        #34d399;
+  --color-green-dim:    #064e3b;
+
+  /* Borders & dividers */
+  --color-border:       #1e3560;
+  --color-border-light: #2a4a80;
+
+  /* Top bar */
+  --color-topbar-bg:    #060c18;
+  --color-topbar-border:#1e3560;
+
+
+  /* ── TYPOGRAPHY ─────────────────────────────────────────────── */
+
+  /*
+   * System font stacks — 100 % offline safe.
+   * The browser picks the best available font on the user's machine.
+   * No @font-face, no external requests.
+   */
+
+  /* Headings — geometric / humanist sans */
+  --font-display: "Segoe UI", "Helvetica Neue", Arial,
+                  "Liberation Sans", sans-serif;
+
+  /* Body — optimised for reading on screens */
+  --font-body:    "Segoe UI", system-ui, -apple-system,
+                  "Helvetica Neue", Arial, sans-serif;
+
+  /* Data / labels — monospaced for numbers and code */
+  --font-mono:    "Cascadia Code", "Consolas", "Courier New",
+                  "Liberation Mono", monospace;
+
+
+  /* ── TYPE SCALE (1.25 major-third ratio) ────────────────────── */
+  --text-xs:   0.64rem;   /*  ~10 px  captions, footnotes          */
+  --text-sm:   0.80rem;   /*  ~13 px  labels, small UI             */
+  --text-base: 1.00rem;   /*  ~16 px  body                         */
+  --text-md:   1.25rem;   /*  ~20 px  lead paragraph               */
+  --text-lg:   1.563rem;  /*  ~25 px  slide subtitle               */
+  --text-xl:   1.953rem;  /*  ~31 px  section heading              */
+  --text-2xl:  2.441rem;  /*  ~39 px  slide title                  */
+  --text-3xl:  3.052rem;  /*  ~49 px  hero display                 */
+  --text-4xl:  3.815rem;  /*  ~61 px  poster-size title            */
+
+  /* Line heights */
+  --leading-tight:  1.2;
+  --leading-snug:   1.4;
+  --leading-normal: 1.6;
+  --leading-relaxed:1.75;
+
+  /* Font weights */
+  --weight-regular: 400;
+  --weight-medium:  500;
+  --weight-semibold:600;
+  --weight-bold:    700;
+
+
+  /* ── SPACING SCALE (base 4 px) ──────────────────────────────── */
+  --space-1:   0.25rem;  /*  4 px  */
+  --space-2:   0.5rem;   /*  8 px  */
+  --space-3:   0.75rem;  /* 12 px  */
+  --space-4:   1rem;     /* 16 px  */
+  --space-5:   1.25rem;  /* 20 px  */
+  --space-6:   1.5rem;   /* 24 px  */
+  --space-8:   2rem;     /* 32 px  */
+  --space-10:  2.5rem;   /* 40 px  */
+  --space-12:  3rem;     /* 48 px  */
+  --space-16:  4rem;     /* 64 px  */
+  --space-20:  5rem;     /* 80 px  */
+  --space-24:  6rem;     /* 96 px  */
+
+  /* Layout max-widths */
+  --max-width-text:   65ch;    /* comfortable reading column       */
+  --max-width-slide:  1100px;  /* slide content container          */
+  --topbar-height:    3.5rem;  /* 56 px                            */
+
+  /* Slide padding (responsive overrides in layout.css) */
+  --slide-padding-x: var(--space-16);
+  --slide-padding-y: var(--space-12);
+
+
+  /* ── BORDER RADIUS ───────────────────────────────────────────── */
+  --radius-sm:  4px;
+  --radius-md:  8px;
+  --radius-lg:  16px;
+  --radius-xl:  24px;
+  --radius-pill:9999px;
+
+
+  /* ── SHADOWS ─────────────────────────────────────────────────── */
+  --shadow-sm:  0 1px 3px rgba(0, 0, 0, 0.5);
+  --shadow-md:  0 4px 12px rgba(0, 0, 0, 0.6);
+  --shadow-lg:  0 8px 32px rgba(0, 0, 0, 0.7);
+
+  /* Glow effects for accents */
+  --glow-amber: 0 0 24px rgba(245, 166, 35, 0.35);
+  --glow-cyan:  0 0 24px rgba(56, 189, 248, 0.35);
+  --glow-warm:  0 0 24px rgba(249, 115, 22, 0.35);
+
+
+  /* ── TRANSITIONS ─────────────────────────────────────────────── */
+  --duration-fast:   150ms;
+  --duration-normal: 300ms;
+  --duration-slow:   500ms;
+  --ease-out:  cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:   cubic-bezier(0.4, 0, 1, 1);
+  --ease-both: cubic-bezier(0.45, 0, 0.55, 1);
+
+  /* z-index layers */
+  --z-base:    0;
+  --z-raised:  10;
+  --z-overlay: 100;
+  --z-topbar:  200;
+  --z-modal:   300;
+}
+
+
+/* ── REDUCED MOTION ─────────────────────────────────────────────
+ * When the user has requested reduced motion in their OS settings,
+ * we collapse all animation/transition durations to near-zero.
+ * This respects accessibility needs and is WCAG 2.1 success
+ * criterion 2.3.3 (Animation from Interactions).
+ * ─────────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast:   1ms;
+    --duration-normal: 1ms;
+    --duration-slow:   1ms;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration:       1ms !important;
+    animation-iteration-count:1  !important;
+    transition-duration:      1ms !important;
+    scroll-behavior:          auto !important;
+  }
+}
